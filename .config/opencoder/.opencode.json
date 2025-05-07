@@ -1,0 +1,43 @@
+{
+  "data": {
+    "directory": ".opencode"
+  },
+  "providers": {
+    "openai": {
+      "disabled": false
+    },
+    "anthropic": {
+      "disabled": false
+    },
+    "groq": {
+      "disabled": false
+    }
+  },
+  "agents": {
+    "coder": {
+      "model": "claude-3.7-sonnet",
+      "maxTokens": 5000
+    },
+    "task": {
+      "model": "claude-3.7-sonnet",
+      "maxTokens": 5000
+    },
+    "title": {
+      "model": "claude-3.7-sonnet",
+      "maxTokens": 80
+    }
+  },
+  "mcpServers": {},
+  "lsp": {
+    "go": {
+      "disabled": false,
+      "command": "gopls"
+    },
+    "rust": {
+      "disabled": false,
+      "command": "rust-analyzer"
+    }
+  },
+  "debug": false,
+  "debugLSP": false
+}

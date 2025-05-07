@@ -1,0 +1,21 @@
+{
+    "runtime.version": "LuaJIT",
+    "diagnostics": {
+        "enable": true,
+        "globals": [
+            "hs"
+        ],
+        "neededFileStatus": {
+            "codestyle-check": "Any"
+        }
+    },
+    "workspace": {
+        "library": [
+            "runtime/lua"
+        ],
+        "checkThirdParty": false,
+        "maxPreload": 2000,
+        "preloadFileSize": 1000
+    },
+    "telemetry.enable": false
+}

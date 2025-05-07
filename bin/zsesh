@@ -1,0 +1,104 @@
+#!/bin/bash
+
+USAGE=$(cat <<-END
+Usage: tsesh <PATH>
+
+Tmux session switcher, if a PATH argument is provided will either switch to or
+start a new session named after the basename of that path and in that location.
+If no PATH is provided a fzf window will be presented from common options.
+
+OPTIONS:
+    --popup [use if called from a zellij popup window, changes some fzf options]
+END
+)
+POSITIONAL_ARGS=()
+while (( "$#" )); do
+    case "$1" in
+        -h|--help)
+            echo "$USAGE" && exit 1 ;;
+        --popup)
+            POPUP=true && shift ;;
+        --layout)
+            LAYOUT=$1 && shift ;;
+        --) # end argument parsing
+            shift && break ;;
+        -*|--*=) # unsupported flags
+            echo "Error: Unsupported flag $1" >&2 && exit 1 ;;
+        *)
+            POSITIONAL_ARGS+=("$1") # save positional arg
+            shift ;;
+    esac
+done
+
+set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
+
+
+# Selection using fzf ---
+dir2name(){
+    # Set of rules to transform directories into sesh_names
+    name="$1"
+    sesh_name=$(basename "$name")
+    echo "$sesh_name"
+}
+
+find_directories(){
+    # Responsible for chosing which directories to display
+    possible_options="$HOME/Developer"
+    find  $possible_options -mindepth 1 -maxdepth 1 -type d -not -path '*/.*';
+}
+
+zellij_has_session(){
+     zellij list-sessions | awk '{print $1}' | grep -q $1 
+}
+
+tabulate() {
+    # Reads a list of directories from find command and processes them to
+    # a table for fzf to display, it also prepends all the running zellij sessions
+    # to the list so they can also be selected, outputs a colored table
+    if [[ $is_inside == "true" ]]; then
+        current_session=$(zellij list-sessions | grep \(current\)| awk '{print $1}' | sed 's/:$//')
+    fi
+    printf "\x1b[1mSession Directory Status\x1b[0m\n"  #Headings
+    {
+        for name in $(zellij list-sessions | awk '{print $1}' | sed 's/:$//'); do
+            status="\x1b[32mrunning\x1b[0m"
+            line="-"
+            if [[ ! $name == $current_session ]]; then
+                printf "\x1b[33m$name \x1b[34m$line\x1b[0m $status\n"
+            fi
+        done
+        while IFS=$'\n' read -r line; do
+            name="$(dir2name $line)"
+            if ! zellij_has_session $name 2> /dev/null ; then
+                # Don't process running ones
+                zellij attach -b $name options --default-cwd $line
+                printf "\x1b[33m$name \x1b[34m$line\x1b[0m $status\n"
+            fi
+        done | sort -k1,1
+    }
+}
+
+# This section gets the selected and sesh_name from cmd line of from fzf
+# if no cmd line args are provided
+if [[ $# -eq 1 ]]; then
+    selected=$1
+    sesh_name=$(basename $selected)
+    if [[ ! -d $selected ]]; then
+        selected=$HOME
+    fi
+else
+    fzf_bin="fzf"
+    fzf_args="--header-lines=1 --ansi"
+    selected=$(find_directories | tabulate | column -t -s' '\
+        | sed '1s/^/  /' | $fzf_bin $fzf_args )
+    # sesh_name=$(echo $selected | awk '{ print $1 }' | sed 's/\./_/g')
+    sesh_name=$(echo $selected | awk '{ print $1 }')
+    selected=$(echo $selected | awk '{ print $2 }')
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+# Session switching ---
+zellij options --default-cwd $selected --session-name $sesh_name --attach-to-session true

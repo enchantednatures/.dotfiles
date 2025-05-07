@@ -1,0 +1,171 @@
+" General settings
+" set guicursor= ""
+let mapleader = " "
+set nu
+set relativenumber
+set highlightedyank
+" set linenumber
+set showmode
+set showcmd
+set visualbell
+set clipboard+=unnamed
+set scrolloff=8
+
+set ignorecase
+set smartcase
+set incsearch
+
+set ideajoin
+
+set surround
+set nohlsearch
+set nerdtree
+set idearefactormode=keep
+
+let g:highlightedyank_highlight_color = "rgba(128, 128, 128, 255)"
+let g:highlightedyank_highlight_duration = 20
+set which-key
+let g:WhichKey_FontSize = 16
+let g:WhichKey_CommandColor = "#41ead4"
+let g:WhichKey_PrefixColor = "#f335b2"
+let g:WhichKey_SortOrder = "by_key_prefix_first"
+let g:WhichKeyDesc_leader = "<leader> Leader key"
+let g:WhichKey_DefaultDelay = 200
+
+
+
+
+" Edit and reload ideavim configuration
+nnoremap <Leader>vv :e ~/.ideavimrc<CR>
+map <Leader>vr :source ~/.ideavimrc <CR>
+
+" Literally shut up.
+
+
+" Better viewing
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap g, g,zvzz
+nnoremap g; g;zvzz
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap <Leader>qq <Action>(Close)
+" nnoremap <Leader>ww <Action>(SaveAll)
+" nnoremap <Leader>wq :update<CR>:quit<CR>
+map <leader>w <Action>(SaveAll)
+
+" Don't use Ex mode, use Q for formatting
+map <leader>dc <Action>(Debug)
+nnoremap Q <nop>
+
+map <M-g> <Action>(Git.Menu)
+
+" Refactoring
+map <leader>rr <Action>(Refactorings.QuickListPopupAction)
+nmap <Leader>ri <Action>(Inline)
+" nmap <Leader>rr <Action>(RenameElement)
+nmap <Leader>rev <Action>(IntroduceVariable)
+vmap <Leader>rev <Action>(IntroduceVariable)
+nmap <Leader>rem <Action>(ExtractMethod)
+vmap <Leader>rem <Action>(ExtractMethod)
+map <Leader>rm <Action>(Move)
+map <Leader>ro <Action>(OptimizeImports)
+map <Leader>rG <Action>(Generate)
+map <c-\> <Action>(ActivateTerminalToolWindow)
+" Code formatting
+nmap <Leader>f  <Action>(ReformatCode)
+
+map <leader>o <Action>(OptimizeImports)
+map <leader>l <Action>(RecentFiles)
+map <leader>h  :action LocalHistory.ShowHistory<CR>
+map ]e <Action>(GotoNextError)
+map [e <Action>(GotoPreviousError)
+
+" Better escape using jk in insert mode
+inoremap jk <Esc>
+
+
+" Better indent
+vnoremap < <gv
+vnoremap > >gv
+
+" Paste over currently selected text without yanking it
+
+" Move Lines
+nnoremap <A-j> :m .+1<CR>==
+vnoremap <A-j> :m '>+1<CR>gv=gv
+nnoremap <A-k> :m .-2<CR>==
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" Resize window using <shift> arrow keys
+nnoremap <S-Up> :resize +2<CR>
+nnoremap <S-Down> :resize -2<CR>
+nnoremap <S-Left> :vertical resize -2<CR>
+nnoremap <S-Right> :vertical resize +2<CR>
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+nnoremap J mzJ`z
+
+map <Leader>wt :%s/\s\+$//e<cr>
+
+
+" Greatest remap ever
+xnoremap <Leader>p "_dP
+vnoremap p "_dP
+
+nnoremap <Leader>y "+y
+vnoremap <Leader>y "+y
+nnoremap <Leader>Y "+Y
+
+
+" Comment lines
+map gcc <Action>(CommentByLineComment)
+map gbc <Action>(CommentByBlockComment)
+
+" Find Files
+map <leader>tf <Action>(GotoFile)
+map gi <Action>(GotoImplementation)
+" Search in Project (similar to Telescope frecency)
+map <leader>tc <Action>(SearchEverywhere)
+
+map <leader>ta <Action>(FileStructurePopup)
+" Open Buffers (similar to Telescope buffers)
+map <leader>to <Action>(Switcher)
+
+" Git Repos (no direct equivalent, but Recent Files is an alternative)
+map <leader>tg <Action>(RecentFiles)
+
+" Help
+map <leader>th <Action>(ShowHelp)
+
+" Projects (similar to Telescope project)
+map <leader>tp <Action>(OpenProject)
+
+" Workspace (similar to Telescope live_grep)
+map <leader>tw <Action>(FindInPath)
+
+" Recents (similar to Telescope oldfiles)
+map <leader>tr <Action>(RecentFiles)
+
+
+map <leader>tb <Action>(Find)
+
+" map <leader>zc <Action>(QuickSwitchScheme)
+
+" Undo (no direct equivalent, but LocalHistory.ShowHistory is an alternative)
+map <leader>U :action LocalHistory.ShowHistory<CR>
+
+
+
+" Open NERDTree (use q to exit)
+map <leader>e :NERDTreeToggle<CR>
+map <leader>U :action LocalHistory.ShowHistory<CR>
+map <leader>b <Action>(Build)
+nnoremap <c-\> <Action>(ActivateTerminalToolWindow)
+
+nnoremap <leader>cR <Action>(Run)
+""" Distraction Free Mode
+nnoremap <c-z> <Action>(ToggleDistractionFreeMode)
+

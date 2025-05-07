@@ -1,0 +1,43 @@
+[user]
+	name = Hunter Casten
+	email = huntercasten@icloud.com
+[pull]
+	rebase = true
+	ff = only
+[push]
+	autoSetupRemote = true
+	default = simple
+[init]
+	defaultBranch = main
+[ui "color"]
+	ui = always
+[color]
+	ui = true
+[core]
+	autocrlf = input
+	safecrlf = true
+[merge]
+	tool = nvim -d
+[alias]
+	c = commit
+	s = status
+	st = status
+	lg = log --oneline
+	last = log -1 HEAD
+	f = push --force-with-lease
+	# https://stackoverflow.com/a/11688523/472927
+	ss = "!f() { git stash show stash^{/$*} -p; }; f"
+	sa = "!f() { git stash apply stash^{/$*}; }; f"
+	sl = stash list
+    dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
+[help]
+	autocorrect = 1
+[url "git@github.com:"]
+	insteadOf = gh:
+[github]
+	user = enchantednatures
+[diff]
+	algorithm = patience
+	compactionHeuristic = true
+[protocol]
+	version = 2

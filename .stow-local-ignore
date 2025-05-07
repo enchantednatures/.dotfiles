@@ -1,0 +1,11 @@
+.git
+.github
+config
+bin
+group_vars
+hypr
+ubuntu-install.sh
+.luarc.json
+aliases
+README.md
+todo.md

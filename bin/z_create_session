@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+set -o pipefail
+
+to_kebab_case() {
+    echo "$1" | sed -r 's/([a-z0-9])([A-Z])/\1-\2/g' | tr '[:upper:]' '[:lower:]'
+}
+
+PROJECT_NAME=$1
+LAYOUT_FILE="$HOME/.config/zellij/layouts/${PROJECT_NAME}.kdl"
+KEBAB_LAYOUT_FILE="$HOME/.config/zellij/layouts/$(to_kebab_case "$PROJECT_NAME").kdl"
+
+if [ -f "$LAYOUT_FILE" ]; then
+    zellij attach -b "$PROJECT_NAME" --layout "$LAYOUT_FILE"
+elif [ -f "$KEBAB_LAYOUT_FILE" ]; then
+    zellij attach -b "$PROJECT_NAME" --layout "$KEBAB_LAYOUT_FILE"
+else
+    zellij attach -b "$PROJECT_NAME" options --default-cwd ~/Developer/"$PROJECT_NAME"
+fi

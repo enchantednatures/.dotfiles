@@ -1,0 +1,72 @@
+layout {
+    cwd "~/dev/HomeCluster"
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+
+    pane_template name="pve" {
+        command "ssh"
+        args "pve"
+    }
+
+    pane_template name="tower" {
+        command "ssh"
+        args "tower"
+    }
+
+    pane_template name="seko" {
+        command "ssh"
+        args "seko"
+    }
+
+    tab name="k9s" hide_floating_panes=true  {
+        pane { 
+            command "k9s" 
+        }
+    }
+
+    tab name="nvim" focus=true hide_floating_panes=true {
+        pane { 
+            command "nvim"
+        }
+    }
+
+
+    tab name="prompt" hide_floating_panes=true  {
+        pane { 
+        }
+    }
+
+
+
+
+    tab name="pve" hide_floating_panes=true  {
+        pve
+
+        floating_panes {
+           pve 
+        }
+    }
+
+
+    tab name="seko" hide_floating_panes=true  {
+        seko
+        floating_panes {
+           seko 
+        }
+    }
+
+
+    tab name="tower" hide_floating_panes=true  {
+        tower
+        floating_panes {
+            tower
+        }
+    }
+}

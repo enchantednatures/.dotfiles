@@ -1,0 +1,7 @@
+#!/bin/bash
+brew install terminal-notifier direnv go-task gnu-sed jq k9s php wifi-password kubectl fzf lazygit jq pre-commit helm buf yq
+
+brew install --cask discord hammerspoon obsidian spotify lens docker-desktop
+# bettertouchtool
+# spaceid
+

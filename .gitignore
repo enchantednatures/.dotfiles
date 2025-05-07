@@ -1,0 +1,14 @@
+.config/nvim/lazy-lock.json
+roles/zsh/files/localrc
+.localrc
+.config/sops/age/keys.txt
+notes
+
+.config/karabiner/automatic_backups/
+.config/k9s/clusters/talos/admin@talos/config.yaml
+.config/GitHub/
+.config/go/telemetry/
+.config/nvim/lazy-lock.sync-conflict-20250504-192326-QM2HOI5.json
+.sync-conflict-20250504-192320-QM2HOI5.gitignore
+.config/gh/hosts.yml
+.config/sops
