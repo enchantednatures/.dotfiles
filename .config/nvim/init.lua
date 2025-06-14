@@ -113,12 +113,11 @@ local filter_deprecate = function(name, ...)
 end
 
 vim.deprecate = filter_deprecate
-vim.lsp.set_log_level "INFO"
+vim.lsp.set_log_level "ERROR"
 vim.lsp.config("*", {
   root_markers = { ".git" },
 })
 vim.lsp.enable {
-  "astro",
   "basedpyright",
   "bashls",
   "buf_ls",
@@ -129,7 +128,6 @@ vim.lsp.enable {
   "jsonls",
   "lua_ls",
   "ruff",
-  "spectral",
   "terraform-ls",
   "ts-ls",
   "yamlls",

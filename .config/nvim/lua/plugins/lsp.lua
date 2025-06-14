@@ -21,29 +21,19 @@ return {
     config = function()
       local opts = {
         ensure_installed = {
-          "astro",
           "bashls",
           "buf_ls",
           "clangd",
-          -- "cmake",
-          -- "cssls",
           "docker_compose_language_service",
           "dockerls",
-          -- "dotls",
           "gopls",
           "graphql",
-          -- "html",
           "typescript-language-server",
-          -- "helm_ls",
-          -- "jqls",
+          "helm_ls",
           "lua_ls",
-          -- "nginx_language_server",
-          -- "rust_analyzer",
           "ruff",
           "roslyn",
           "spectral",
-          -- "sqls",
-          -- "templ",
           "terraformls",
           "ts_ls",
           "basedpyright",
@@ -141,7 +131,7 @@ return {
           nls.builtins.formatting.htmlbeautifier,
 
           nls.builtins.formatting.leptosfmt,
-          nls.builtins.formatting.prettierd.with { filetypes = { "html", "json","yaml",  "markdown" } },
+          nls.builtins.formatting.prettierd.with { filetypes = { "html", "json", "yaml", "markdown" } },
           nls.builtins.formatting.google_java_format,
           nls.builtins.formatting.shfmt,
           nls.builtins.formatting.sqlfluff.with { extra_args = { "--dialect", "postgres" } },
@@ -150,5 +140,5 @@ return {
         },
       }
     end,
-  },
+  }
 }

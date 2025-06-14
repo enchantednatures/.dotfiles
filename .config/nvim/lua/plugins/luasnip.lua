@@ -3,7 +3,7 @@ return {
   version = "v2.*",
   event = { "VeryLazy", "InsertEnter" },
   dependencies = {
-    -- "rafamadriz/friendly-snippets",
+    "rafamadriz/friendly-snippets",
   },
   build = "make install_jsregexp",
   opts = {

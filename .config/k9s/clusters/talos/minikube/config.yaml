@@ -1,0 +1,13 @@
+k9s:
+  cluster: talos
+  namespace:
+    active: default
+    lockFavorites: false
+    favorites:
+    - default
+    - all
+  view:
+    active: context
+  featureGates:
+    nodeShell: false
+  portForwardAddress: localhost

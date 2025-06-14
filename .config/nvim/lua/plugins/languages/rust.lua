@@ -41,7 +41,7 @@ return {
           settings = {
             ["rust-analyzer"] = {
               diagnostics = {
-                enable = false
+                enable = false,
               },
               capabilities = require("blink.cmp").get_lsp_capabilities {
                 textDocument = {
@@ -74,6 +74,9 @@ return {
                 allFeatures = true,
                 command = "clippy",
                 extraArgs = { "--no-deps" },
+              },
+              lens = {
+                enable = true,
               },
               procMacro = {
                 enable = true,

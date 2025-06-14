@@ -129,20 +129,23 @@ return {
     },
     snippets = { preset = "luasnip" },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "omni", "lazydev", "minuet" },
+      default = { "lsp", "path", "snippets", "buffer", "omni", "lazydev" },
+      per_filetype = {
+        codecompanion = { "codecompanion" },
+      },
       providers = {
         lazydev = {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
           score_offset = 100,
         },
-        minuet = {
-          name = "minuet",
-          module = "minuet.blink",
-          async = true,
-          timeout_ms = 3000,
-          score_offset = 50,
-        },
+        -- minuet = {
+        --   name = "minuet",
+        --   module = "minuet.blink",
+        --   async = true,
+        --   timeout_ms = 3000,
+        --   score_offset = 50,
+        -- },
         path = {
           min_keyword_length = 2,
           score_offset = -10,

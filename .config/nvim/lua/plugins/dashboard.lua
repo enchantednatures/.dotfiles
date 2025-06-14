@@ -7,7 +7,6 @@ return {
     dashboard.section.header.val = {}
     dashboard.section.buttons.val = {
       dashboard.button("e", "󰺾 " .. " Explorer", ":NvimTreeToggle <CR>"),
-      dashboard.button("h", "󱡅 " .. " Harpoon Marks", [[:lua require("harpoon.ui").toggle_quick_menu() <cr>]]),
       dashboard.button("m", "󱡁 " .. " Marks", ":Telescope marks <CR>"),
       dashboard.button("SPC f", " " .. " Find file", ":Telescope find_files <CR>"),
       dashboard.button("d", " " .. " Database", ":Dbee<CR>"),

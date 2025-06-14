@@ -43,7 +43,7 @@ dir2name(){
 
 find_directories(){
     # Responsible for chosing which directories to display
-    possible_options="$HOME/Developer"
+    possible_options="$HOME/dev"
     find  $possible_options -mindepth 1 -maxdepth 1 -type d -not -path '*/.*';
 }
 

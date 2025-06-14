@@ -318,4 +318,29 @@ return {
       },
     },
   },
+  {
+    "folke/zen-mode.nvim",
+    dependencies = {
+      "folke/twilight.nvim",
+    },
+    cmd = { "ZenMode" },
+    keys = {
+      { "<leader>zm", "<CMD>ZenMode <CR>", desc = "Toggle [Z]en [M]ode" },
+    },
+    opts = {
+      window = {
+        width = 0.40, -- width will be 85% of the editor width
+      },
+      {
+        plugins = {
+          options = {
+            enabled = true,
+          },
+          twilight = { enabled = true },
+          gitsigns = { enabled = false },
+          todo = { enabled = true },
+        },
+      },
+    },
+  },
 }

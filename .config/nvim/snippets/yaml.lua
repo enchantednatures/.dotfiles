@@ -203,4 +203,19 @@ spec:
       }
     )
   ),
+
+  s(
+    "k-namespace",
+    fmt(
+      [[
+apiVersion: v1
+kind: Namespace
+metadata:
+ name: {}
+]],
+      {
+        i(1, "default"),
+      }
+    )
+  ),
 }
