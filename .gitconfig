@@ -19,6 +19,9 @@
 [merge]
 	tool = nvim -d
 [alias]
+    standup = shortlog -sn --all --no-merges
+    rb = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
+    ls = log --all --oneline --no-merges
 	c = commit
 	s = status
 	st = status
