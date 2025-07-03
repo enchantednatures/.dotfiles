@@ -37,20 +37,15 @@ layout {
         }
     }
 
-
-    tab name="prompt" hide_floating_panes=true  {
+    tab name="opencode" focus=false hide_floating_panes=true {
         pane { 
+            command "opencode"
         }
     }
 
 
-
-
-    tab name="pve" hide_floating_panes=true  {
-        pve
-
-        floating_panes {
-           pve 
+    tab name="prompt" hide_floating_panes=true  {
+        pane { 
         }
     }
 
@@ -59,14 +54,6 @@ layout {
         seko
         floating_panes {
            seko 
-        }
-    }
-
-
-    tab name="tower" hide_floating_panes=true  {
-        tower
-        floating_panes {
-            tower
         }
     }
 }

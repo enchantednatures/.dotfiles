@@ -84,6 +84,7 @@ if status is-interactive
     fish_vi_key_bindings
 
     atuin gen-completions --shell fish | source
+    task --completion fish | source
     # Enable directory-specific variables
     direnv hook fish | source
     zoxide init fish | source

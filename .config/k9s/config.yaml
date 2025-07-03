@@ -1,6 +1,7 @@
 k9s:
   ui:
-    skin: gruvbox-dark # => All clusters will use this skin unless otherwise specified in the context configuration file
+    # skin: gruvbox-dark # => All clusters will use this skin unless otherwise specified in the context configuration file
+    skin: gruvbox-transparent # => All clusters will use this skin unless otherwise specified in the context configuration file
     enableMouse: false
     headless: false
     logoless: false

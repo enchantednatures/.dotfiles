@@ -7,6 +7,14 @@ local c = ls.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
 local rep = require("luasnip.extras").rep
 
+local kubernetes = require "utils.kubernetes"
+local kubernetes_namespaces = kubernetes.get_namespaces()
+
+local namespaces = {}
+for idx, namespace in ipairs(kubernetes_namespaces) do
+  table.insert(namespaces, i(idx, namespace))
+end
+
 return {
   -- ServiceAccount snippet
   s(
@@ -215,6 +223,41 @@ metadata:
 ]],
       {
         i(1, "default"),
+      }
+    )
+  ),
+  s(
+    "k-virtualservice",
+    fmt(
+      [[
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {}
+  namespace: {}
+spec:
+  hosts:
+    - {}.${{SECRET_DOMAIN}}
+  gateways:
+    - istio-ingress/external-gateway 
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: {}.{}.svc.cluster.local
+            port:
+              number: {}
+    ]],
+      {
+        i(1, "app-name"),
+        -- i(2, "app-namespace"),
+        c(2, namespaces),
+        i(3, "app-subdomain"),
+        i(4, "servce-name"),
+        rep(2), -- repeats the namespace value
+        i(5, "80"),
       }
     )
   ),

@@ -65,7 +65,7 @@ return {
       }
     end,
   },
-  { "andweeb/presence.nvim", lazy = true, event = "VeryLazy" },
+  -- { "andweeb/presence.nvim", lazy = true, event = "VeryLazy" },
   { "editorconfig/editorconfig-vim" },
   { import = "plugins.languages.csharp", enabled = config.use_dotnet },
   { import = "plugins.dbee.init" },

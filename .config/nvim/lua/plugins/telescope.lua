@@ -70,7 +70,8 @@ return {
         },
       },
       {
-        dir = "~/dev/topsail.nvim",
+        -- dir = "~/dev/topsail.nvim",
+        "enchantednatures/topsail.nvim",
         keys = {
           {
             "<leader>tcf",

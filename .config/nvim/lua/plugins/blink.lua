@@ -1,6 +1,13 @@
 return {
   "saghen/blink.cmp",
   version = "1.*",
+  dependencies = {
+    "fang2hou/blink-copilot",
+    opts = {
+      max_completions = 3, -- Global default for max completions
+      max_attempts = 2, -- Global default for max attempts
+    },
+  },
   opts = {
     signature = { enabled = true },
 
@@ -129,7 +136,7 @@ return {
     },
     snippets = { preset = "luasnip" },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "omni", "lazydev" },
+      default = { "lsp", "path", "snippets", "buffer", "omni", "lazydev", "copilot" },
       per_filetype = {
         codecompanion = { "codecompanion" },
       },
@@ -139,13 +146,15 @@ return {
           module = "lazydev.integrations.blink",
           score_offset = 100,
         },
-        -- minuet = {
-        --   name = "minuet",
-        --   module = "minuet.blink",
-        --   async = true,
-        --   timeout_ms = 3000,
-        --   score_offset = 50,
-        -- },
+        copilot = {
+          name = "copilot",
+          module = "blink-copilot",
+          score_offset = 100,
+          async = true,
+          opts = {
+            max_completions = 3,
+          },
+        },
         path = {
           min_keyword_length = 2,
           score_offset = -10,
