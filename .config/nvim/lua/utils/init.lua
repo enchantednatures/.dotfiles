@@ -3,7 +3,7 @@ local M = {}
 require "utils.sops"
 require "utils.kubernetes"
 require "utils.diff"
-require "utils.ai"
+
 local diagnostics = require "utils.diagnostics"
 diagnostics:setup_diagnostics()
 
