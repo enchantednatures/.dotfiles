@@ -87,7 +87,7 @@ keymap("n", "<leader>Y", [["+Y]])
 -- keymap({ "n", "v" }, "<leader>d", [["_d]])
 
 keymap("n", "Q", "<nop>")
--- shut all the way up 
+-- shut all the way up
 keymap("n", "ZZ", "<cmd>wqall <CR>")
 keymap("n", "<M-x>", "<cmd>!chmod +x %<CR>", { silent = true })
 keymap("n", "<leader>w", "<cmd>w <CR>")

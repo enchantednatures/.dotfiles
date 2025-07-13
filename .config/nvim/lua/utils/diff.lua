@@ -8,7 +8,7 @@ function M.changed_files()
   local actions = require "telescope.actions"
   local action_state = require "telescope.actions.state"
   local conf = require("telescope.config").values
-  
+
   local base_branch = "main"
 
   -- Determine if 'main' or 'master' is the base branch

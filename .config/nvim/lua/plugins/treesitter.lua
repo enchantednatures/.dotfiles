@@ -218,7 +218,7 @@ return {
         "c_sharp",
         "cpp",
         "css",
-        "dap_repl",
+
         "diff",
         "dockerfile",
         "editorconfig",

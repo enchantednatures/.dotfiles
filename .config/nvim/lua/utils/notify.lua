@@ -3,9 +3,7 @@ local M = {}
 ---@param msg string|string[]
 ---@param opts? LazyNotifyOpts
 function M.notify(msg, opts)
-  if vim.in_fast_event() then
-    return vim.schedule(function() M.notify(msg, opts) end)
-  end
+  if vim.in_fast_event() then return vim.schedule(function() M.notify(msg, opts) end) end
 
   opts = opts or {}
   if type(msg) == "table" then
@@ -17,7 +15,7 @@ function M.notify(msg, opts)
   local n = opts.once and vim.notify_once or vim.notify
   n(msg, opts.level or vim.log.levels.INFO, {
     on_open = function(win)
-      local ok = pcall(function() vim.treesitter.language.add("markdown") end)
+      local ok = pcall(function() vim.treesitter.language.add "markdown" end)
       if not ok then pcall(require, "nvim-treesitter") end
       vim.wo[win].conceallevel = 3
       vim.wo[win].concealcursor = ""
