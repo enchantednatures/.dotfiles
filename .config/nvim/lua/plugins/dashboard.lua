@@ -20,7 +20,7 @@ return {
       dashboard.button("T", " " .. " Todo", ":TodoTelescope <CR>"),
       dashboard.button("g", "󰊢" .. " Git", ":Neogit <CR>"),
       dashboard.button("a", "󱐏" .. " New AI Chat", ":CodeCompanionChat <CR>"),
-      dashboard.button("c", "󰊢" .. " GitHub Actions", ":Pipeline <CR>"),
+      dashboard.button("c", "󰊢" .. " GitHub Actions", ":Octo run list <CR>"),
       dashboard.button(".", " " .. " Config", ":e $MYVIMRC <CR>"),
       dashboard.button("l", "󰒲" .. " Lazy", ":Lazy<CR>"),
       dashboard.button("q", " " .. " Quit", ":qa<CR>"),
