@@ -1,17 +1,7 @@
 local config = require("config.config").opts
 return {
-  {
-    "rebelot/kanagawa.nvim",
-    lazy = false,
-    priority = 1000,
-  },
+  -- { "rebelot/kanagawa.nvim", lazy = false, priority = 1000 },
   { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
-  {
-    dir = "~/dev/topsail.nvim/",
-    enabled = config.use_topsail,
-    lazy = false,
-    opts = { notify = true },
-  },
   {
     "utilyre/barbecue.nvim",
     event = "VeryLazy",
@@ -58,17 +48,13 @@ return {
   },
   {
     "nvim-tree/nvim-web-devicons",
-    -- dependencies = { "DaikyXendo/nvim-material-icon" },
-    config = function()
-      require("nvim-web-devicons").setup {
-        -- override = require("nvim-material-icon").get_icons(),
-      }
-    end,
+    config = function() require("nvim-web-devicons").setup {} end,
   },
-  -- { "andweeb/presence.nvim", lazy = true, event = "VeryLazy" },
+  { "andweeb/presence.nvim", lazy = true, event = "VeryLazy" },
   { "editorconfig/editorconfig-vim" },
   { import = "plugins.languages.csharp", enabled = config.use_dotnet },
   { import = "plugins.dbee.init" },
+  { import = "plugins.languages.typescript" },
   { import = "plugins.languages.go", enabled = config.use_go },
   { import = "plugins.languages.rust", enabled = config.use_rust },
   { import = "plugins.languages.python", enabled = config.use_python },
@@ -89,7 +75,6 @@ return {
   {
     "windwp/nvim-spectre",
     event = "VeryLazy",
-    -- stylua: ignore
     keys = {
       { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
@@ -175,24 +160,12 @@ return {
     mappings = {},
   },
   {
-    "topaxi/pipeline.nvim",
-    cmd = "Pipeline",
-    keys = {
-      { "<leader>gha", "<cmd>Pipeline<cr>", desc = "Open Github Actions" },
-      { "<leader>ci", "<cmd>Pipeline<cr>", desc = "Open pipeline.nvim" },
-    },
-    -- optional, you can also install and use `yq` instead.
-    build = "make",
-    dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
-    opts = {},
-  },
-  {
     "jinh0/eyeliner.nvim",
     lazy = false,
     config = function()
       require("eyeliner").setup {
         highlight_on_key = true, -- show highlights only after keypress
-        dim = false, -- dim all other characters if set to true (recommended!)
+        dim = true, -- dim all other characters if set to true (recommended!)
       }
     end,
   },
@@ -227,7 +200,7 @@ return {
       { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
       { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
       { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+      -- { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
   {
@@ -342,5 +315,16 @@ return {
         },
       },
     },
+  },
+  {
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+    lazy = false,
   },
 }

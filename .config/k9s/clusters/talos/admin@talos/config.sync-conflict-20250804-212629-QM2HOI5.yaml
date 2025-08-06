@@ -1,0 +1,20 @@
+k9s:
+  cluster: talos
+  namespace:
+    active: default
+    lockFavorites: false
+    favorites:
+      - default
+      - all
+      - istio-ingress
+      - istio-system
+      - rook-ceph
+      - flux-system
+      - knative-serving
+      - porygon
+      - kafka
+  view:
+    active: configmap
+  featureGates:
+    nodeShell: false
+  proxy: null

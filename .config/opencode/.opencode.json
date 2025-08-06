@@ -1,0 +1,42 @@
+{
+  "data": {},
+  "providers": {
+    "groq": {
+      "apiKey": "",
+      "disabled": false
+    },
+    "openrouter": {
+      "apiKey": "",
+      "disabled": false
+    }
+  },
+  "lsp": {
+    "gopls": {
+      "enabled": false,
+      "command": "gopls",
+      "args": null,
+      "options": null
+    }
+  },
+  "agents": {
+    "coder": {
+      "model": "openrouter.gemini-2.5",
+      "maxTokens": 8192,
+      "reasoningEffort": ""
+    },
+    "task": {
+      "model": "openrouter.gemini-2.5",
+      "maxTokens": 8192,
+      "reasoningEffort": ""
+    },
+    "title": {
+      "model": "openrouter.gemini-2.5",
+      "maxTokens": 80,
+      "reasoningEffort": ""
+    }
+  },
+  "tui": {
+    "theme": "system"
+  },
+  "shell": {}
+}

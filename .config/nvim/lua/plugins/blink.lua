@@ -1,24 +1,21 @@
 return {
   "saghen/blink.cmp",
   version = "1.*",
-  dependencies = {
-    "fang2hou/blink-copilot",
-    opts = {
-      max_completions = 3, -- Global default for max completions
-      max_attempts = 2, -- Global default for max attempts
-    },
-  },
   opts = {
     signature = { enabled = true },
 
     enabled = function()
-      return not vim.tbl_contains({
+      local disabled_ft = {
         "NvimTree",
         "Telescope",
         "DressingInput",
         "TelescopePrompt",
-      }, vim.bo.filetype) and vim.bo.buftype ~= "prompt" and vim.b.completion ~= false
+      }
+      return not vim.tbl_contains(disabled_ft, vim.bo.filetype)
+        and vim.bo.buftype ~= "prompt"
+        and vim.b.completion ~= false
     end,
+
     cmdline = {
       keymap = {
         ["<Tab>"] = { "select_and_accept", "select_next" },
@@ -27,9 +24,13 @@ return {
         ["<C-k>"] = { "select_prev", "fallback" },
         ["<C-j>"] = { "select_next", "fallback" },
       },
-      -- (optionally) automatically show the menu
       completion = {
-        menu = { auto_show = true },
+        ghost_text = {
+          enabled = true,
+        },
+        menu = {
+          auto_show = true,
+        },
         list = {
           selection = {
             preselect = false,
@@ -42,12 +43,18 @@ return {
       preset = "default",
       ["<C-k>"] = { "select_prev", "fallback" },
       ["<C-j>"] = { "select_next", "fallback" },
-      ["C-space>"] = { "show", "show_documentation", "hide_documentation", "hide" },
+      ["<C-space>"] = { "show", "show_documentation", "hide_documentation", "hide" },
       ["<CR>"] = { "accept", "fallback" },
       ["<Tab>"] = {
         function(cmp)
+          local luasnip = require "luasnip"
           if cmp.snippet_active() then
-            return cmp.accept()
+            if luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+              return
+            else
+              return cmp.accept()
+            end
           else
             return cmp.select_and_accept()
           end
@@ -56,6 +63,12 @@ return {
         "fallback",
       },
       ["<S-Tab>"] = { "snippet_backward", "fallback" },
+      ["ESC"] = {
+        function(cmp)
+          if cmp.snippet_active() then return cmp.cancel() end
+          return cmp.hide()
+        end,
+      },
     },
 
     appearance = {
@@ -130,31 +143,17 @@ return {
         enabled = true,
         show_with_selection = true,
         show_without_selection = false,
-        show_with_menu = true,
+        show_with_menu = false,
         show_without_menu = true,
       },
     },
     snippets = { preset = "luasnip" },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "omni", "lazydev", "copilot" },
+      default = { "lsp", "path", "snippets", "buffer" },
       per_filetype = {
         codecompanion = { "codecompanion" },
       },
       providers = {
-        lazydev = {
-          name = "LazyDev",
-          module = "lazydev.integrations.blink",
-          score_offset = 100,
-        },
-        copilot = {
-          name = "copilot",
-          module = "blink-copilot",
-          score_offset = 100,
-          async = true,
-          opts = {
-            max_completions = 3,
-          },
-        },
         path = {
           min_keyword_length = 2,
           score_offset = -10,

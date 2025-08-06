@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "everforest",
+  "theme": "system",
   "autoshare": false,
   "autoupdate": true,
   "model": "anthropic/claude-sonnet-4-20250514",
@@ -18,7 +18,11 @@
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
       "models": {
-        "deepseek-r1:8b": {}
+        "deepseek-r1:8b": {},
+        "gemma3:4b": {},
+        "gemma3n:e4b": {},
+        "qwen3:8b": {},
+        "qwen3:14b": {}
       },
       "options": {
         "baseURL": "http://gateway-2:11434/v1"
@@ -26,4 +30,3 @@
     }
   }
 }
-

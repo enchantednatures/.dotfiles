@@ -66,7 +66,7 @@ return {
           },
           schema = {
             model = {
-              default = "meta-llama/llama-4-maverick-17b-128e-instruct",
+              default = "openai/gpt-oss-120b",
             },
           },
         })

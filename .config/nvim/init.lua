@@ -117,19 +117,24 @@ vim.lsp.set_log_level "ERROR"
 vim.lsp.config("*", {
   root_markers = { ".git" },
 })
+vim.g.markdown_fenced_languages = {
+  "ts=typescript",
+}
 vim.lsp.enable {
   "basedpyright",
   "bashls",
   "buf_ls",
   "clangd",
   "dockerls",
+  "dockerfile-language-server",
   "docker_compose_language_service",
+  "denols",
   "graphql",
   "jsonls",
   "lua_ls",
   "ruff",
   "terraform-ls",
-  "ts-ls",
+  -- "ts-ls",
   "yamlls",
 }
 

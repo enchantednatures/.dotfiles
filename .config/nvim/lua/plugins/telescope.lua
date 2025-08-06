@@ -70,19 +70,29 @@ return {
         },
       },
       {
-        -- dir = "~/dev/topsail.nvim",
-        "enchantednatures/topsail.nvim",
+        -- "enchantednatures/topsail.nvim",
+        dir = "~/dev/topsail.nvim",
+        lazy = false,
+        --- @type TopsailConfig
+        opts = {
+          notify = true,
+          default_register = function() return "x" end,
+          keymaps = {
+            apply = "<leader>ka",
+            create = "<leader>kc",
+            copy = "<leader>ky",
+          },
+        },
+        config = function(_, opts) require("topsail").setup(opts) end,
         keys = {
+
           {
-            "<leader>tcf",
-            function()
-              require("telescope").load_extension "topsail"
-              require("telescope").extensions.topsail.single_file()
-            end,
-            desc = "Find Kubernetes Resources (Workspace)",
+            "<leader>ky",
+            function() require("topsail").copy_resource() end,
+            desc = "Copy current YAML resource to register",
           },
           {
-            "<leader>tcr",
+            "<leader>tc",
             function()
               require("telescope").load_extension "topsail"
               require("telescope").extensions.topsail.workspace()
@@ -95,7 +105,7 @@ return {
         dir = "~/dev/telescope-cnpg.nvim",
         keys = {
           {
-            "<leader>tcw",
+            "<leader>tm",
             function()
               require("telescope").load_extension "cnpg"
               require("telescope").extensions.cnpg.workspace()
@@ -132,6 +142,12 @@ return {
       {
         "<leader>tf",
         require("utils").find_files,
+        desc = "Find Files",
+      },
+
+      {
+        "<leader>ff",
+        require("telescope.builtin").find_files,
         desc = "Find Files",
       },
 
@@ -330,11 +346,14 @@ return {
             theme = "dropdown",
             previewer = false,
             hidden = true,
+
+            path_display = { "tail" },
             find_command = { "rg", "--files", "--hidden", "-g", "!.git" },
           },
           git_files = {
+            path_display = { "smart" },
             theme = "dropdown",
-            previewer = false,
+            previewer = true,
           },
           buffers = {
             theme = "dropdown",

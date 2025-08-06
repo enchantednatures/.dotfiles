@@ -1,6 +1,9 @@
+local lspconfig = require "lspconfig"
+
 return {
   cmd = { "typescript-language-server", "--stdio" },
-  single_file_support = true,
+  root_dir = lspconfig.util.root_pattern "package.json",
+  single_file_support = false,
   filetypes = {
     "javascript",
     "javascriptreact",

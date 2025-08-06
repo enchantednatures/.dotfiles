@@ -39,6 +39,45 @@ return {
 
     local lua = require "luasnip.loaders.from_lua"
     lua.load { paths = os.getenv "HOME" .. "/.config/nvim/snippets/" }
+    -- feel free to change the keys to new ones, those are just my current mappings
+    local opts = { noremap = true, silent = true }
+
+    vim.keymap.set("i", "<C-f>", function()
+      if ls.in_snippet() then -- added to check if you're actually in a snippet
+        if ls.choice_active() then
+          return ls.change_choice(1)
+        else
+          return _G.dynamic_node_external_update(1) -- feel free to update to any index i
+        end
+      end
+    end, opts)
+    vim.keymap.set("s", "<C-f>", function()
+      if ls.in_snippet() then
+        if ls.choice_active() then
+          return ls.change_choice(1)
+        else
+          return _G.dynamic_node_external_update(1)
+        end
+      end
+    end, opts)
+    vim.keymap.set("i", "<C-d>", function()
+      if ls.in_snippet() then
+        if ls.choice_active() then
+          return ls.change_choice(-1)
+        else
+          return _G.dynamic_node_external_update(2)
+        end
+      end
+    end, opts)
+    vim.keymap.set("s", "<C-d>", function()
+      if ls.in_snippet() then
+        if ls.choice_active() then
+          return ls.change_choice(-1)
+        else
+          return _G.dynamic_node_external_update(2)
+        end
+      end
+    end, opts)
 
     ls.config.set_config {
       history = true,

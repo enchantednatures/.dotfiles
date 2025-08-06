@@ -1,6 +1,8 @@
 return {
   {
     "folke/which-key.nvim",
+    lazy = true,
+    event = { "VeryLazy", "BufReadPost" },
     keys = {
       {
         "<leader>?",
@@ -14,8 +16,7 @@ return {
       show_help = true,
       plugins = {
         spelling = {
-          enabled = true,
-          suggestions = 21,
+          enabled = false,
         },
         marks = true,
         registers = true,
@@ -29,8 +30,15 @@ return {
           g = true, -- bindings for prefixed with g
         },
       },
-      triggers = { "<auto>", mode = "nixsotc" },
+      triggers = { { "<auto>", mode = "nixsotc" }, { "a", mode = { "n", "v" } }, { "cr", mode = { "n" } } },
       spec = {
+        { "cr", group = "+Coercion", mode = { "n" } },
+        { "crm", desc = "MixedCase", mode = "n" },
+        { "crs", desc = "snake_case", mode = "n" },
+        { "crc", desc = "pascalCase", mode = "n" },
+        { "cru", desc = "UPPER_CASE", mode = "n" },
+        { "cr-", desc = "dash-case", mode = "n" },
+        { "cr.", desc = "dot.case", mode = "n" },
         { "<leader>D", group = "+Database" },
         { "<leader>T", group = "+Test" }, -- N = { name = "Neotest" }, o = { "Overseer" } },
         { "<leader>O", group = "+Overseer" },
@@ -45,18 +53,14 @@ return {
         { "<leader>v", group = "+View" },
         { "<leader>z", group = "+System" },
         {
-          -- Nested mappings are allowed and can be added in any order
-          -- Most attributes can be inherited or overridden on any level
-          -- There's no limit to the depth of nesting
-          mode = { "n", "v" }, -- NORMAL and VISUAL mode
-          { "<leader>q", "<cmd>q<cr>", desc = "Quit" }, -- no need to specify mode since it's inherited
-          { "<leader>qt", "<cmd>tabclose<cr>", desc = "Close Tab" }, -- no need to specify mode since it's inherited
+          mode = { "n", "v" },
+          { "<leader>q", "<cmd>q<cr>", desc = "Quit" },
+          { "<leader>qt", "<cmd>tabclose<cr>", desc = "Close Tab" },
           { "<leader>w", "<cmd>w<cr>", desc = "Write" },
           { "<leader>wq", "<cmd>x<cr>", desc = "Write and Quit" },
           { "<leader>;", "<cmd>Alpha<cr>", desc = "Dashboard" },
         },
       },
     },
-    event = "VeryLazy",
   },
 }
