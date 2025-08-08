@@ -103,3 +103,6 @@ set --export PATH $BUN_INSTALL/bin $PATH
 # opencode
 fish_add_path /Users/hcasten/.opencode/bin
 alias claude="/home/hcasten/.claude/local/claude"
+
+# opencode
+fish_add_path /home/hcasten/.opencode/bin
