@@ -9,6 +9,7 @@ return {
       "nvim-telescope/telescope-project.nvim",
       {
         "krisajenkins/telescope-kafka.nvim",
+        lazy = true,
         opts = { kcat_path = "/opt/homebrew/bin/kcat" },
         keys = {
           {
