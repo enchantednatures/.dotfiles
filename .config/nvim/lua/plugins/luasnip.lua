@@ -1,7 +1,8 @@
 return {
   "L3MON4D3/LuaSnip",
   version = "v2.*",
-  event = { "VeryLazy", "InsertEnter" },
+  lazy = true,
+  event = { "InsertEnter" },
   dependencies = {
     "rafamadriz/friendly-snippets",
   },

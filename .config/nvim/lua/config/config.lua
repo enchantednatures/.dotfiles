@@ -2,7 +2,6 @@ local M = {}
 
 M.opts = {
   format_on_save = true,
-  use_topsail = true,
   use_copilot = false,
   use_open_webui = false,
   use_minuet = false,

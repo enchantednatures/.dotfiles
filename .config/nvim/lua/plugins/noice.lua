@@ -2,9 +2,23 @@ return {
   "folke/noice.nvim",
   dependencies = {
     "MunifTanjim/nui.nvim",
-    "rcarriga/nvim-notify",
+    -- {
+    --   "rcarriga/nvim-notify",
+    --   lazy = true,
+    --   opts = {
+    --     timeout = 3000,
+    --     background_colour = "#000000",
+    --     max_height = function() return math.floor(vim.o.lines * 0.25) end,
+    --     max_width = function() return math.floor(vim.o.columns * 0.25) end,
+    --   },
+    --   config = function(_, opts)
+    --     require("notify").setup(opts)
+    --     vim.notify = require "notify"
+    --   end,
+    -- },
   },
   event = "VeryLazy",
+  -- lazy = true,
   config = true,
   opts = {
     popupmenu = {

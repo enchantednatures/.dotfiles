@@ -1,27 +1,12 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    lazy = true,
-    event = { "VeryLazy", "BufReadPost" },
+    -- lazy = true,
+    -- event = { "VeryLazy", "BufReadPost" },
     dependencies = {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "nvim-telescope/telescope-file-browser.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
       "nvim-telescope/telescope-project.nvim",
-      {
-        "krisajenkins/telescope-kafka.nvim",
-        lazy = true,
-        opts = { kcat_path = "/opt/homebrew/bin/kcat" },
-        keys = {
-          {
-            "<Leader>kt",
-            function()
-              require("telescope").load_extension "telescope_kafka"
-              require("telescope").extensions.telescope_kafka.kafka_topics()
-            end,
-            desc = "[K]afka [T]opics",
-          },
-        },
-      },
       "nvim-telescope/telescope-ui-select.nvim",
       {
         "ThePrimeagen/git-worktree.nvim",
@@ -37,83 +22,10 @@ return {
           },
         },
       },
-      "cljoly/telescope-repo.nvim",
+      -- "cljoly/telescope-repo.nvim",
       "debugloop/telescope-undo.nvim",
-      {
-        "stevearc/aerial.nvim",
-        lazy = true,
-        config = function(_, opts)
-          local telescope = require "telescope"
-          require("aerial").setup(opts)
-          telescope.load_extension "aerial"
-        end,
-        keys = {
-          {
-            "<leader>ta",
-            "<cmd>Telescope aerial<cr>",
-            desc = "Aerial Code Outline",
-          },
-        },
-      },
       "molecule-man/telescope-menufacture",
       "kkharji/sqlite.lua",
-      {
-        "lpoto/telescope-docker.nvim",
-        keys = {
-          {
-            "<leader>tD",
-            function()
-              require("telescope").load_extension "docker"
-              require("telescope").extensions.docker.docker()
-            end,
-            desc = "[T]elescope [D]ocker",
-          },
-        },
-      },
-      {
-        "enchantednatures/topsail.nvim",
-        -- dir = "~/dev/topsail.nvim",
-        lazy = true,
-        --- @type TopsailConfig
-        opts = {
-          notify = true,
-          default_register = function() return "x" end,
-          keymaps = {
-            apply = "<leader>ka",
-            create = "<leader>kc",
-            copy = "<leader>ky",
-          },
-        },
-        config = function(_, opts) require("topsail").setup(opts) end,
-        keys = {
-          {
-            "<leader>ky",
-            function() require("topsail").copy_resource() end,
-            desc = "Copy current YAML resource to register",
-          },
-          {
-            "<leader>tc",
-            function()
-              require("telescope").load_extension "topsail"
-              require("telescope").extensions.topsail.workspace()
-            end,
-            desc = "Find Kubernetes Resources (Workspace)",
-          },
-        },
-      },
-      {
-        dir = "~/dev/telescope-cnpg.nvim",
-        keys = {
-          {
-            "<leader>tm",
-            function()
-              require("telescope").load_extension "cnpg"
-              require("telescope").extensions.cnpg.workspace()
-            end,
-            desc = "Find CNPG Resources (Workspace)",
-          },
-        },
-      },
     },
     cmd = "Telescope",
     keys = {
@@ -349,7 +261,7 @@ return {
             find_command = { "rg", "--files", "--hidden", "-g", "!.git" },
           },
           git_files = {
-            path_display = { "smart" },
+            path_display = { "truncate" },
             theme = "dropdown",
             previewer = true,
           },
@@ -423,5 +335,87 @@ return {
       telescope.load_extension "undo"
       telescope.load_extension "ui-select"
     end,
+  },
+  -- Kafka (lazy-load on key)
+  {
+    "krisajenkins/telescope-kafka.nvim",
+    lazy = true,
+    keys = {
+      {
+        "<Leader>kt",
+        function()
+          require("telescope").load_extension "telescope_kafka"
+          require("telescope").extensions.telescope_kafka.kafka_topics()
+        end,
+        desc = "[K]afka [T]opics",
+      },
+    },
+    opts = { kcat_path = "/opt/homebrew/bin/kcat" },
+  },
+  -- CNPG (lazy-load on key)
+  {
+    dir = "~/dev/telescope-cnpg.nvim",
+    keys = {
+      {
+        "<leader>tm",
+        function()
+          require("telescope").load_extension "cnpg"
+          require("telescope").extensions.cnpg.workspace()
+        end,
+        desc = "Find CNPG Resources (Workspace)",
+      },
+    },
+  },
+  -- Aerial (lazy-load on key)
+  {
+    "stevearc/aerial.nvim",
+    lazy = true,
+    config = function(_, opts)
+      local telescope = require "telescope"
+      require("aerial").setup(opts)
+      telescope.load_extension "aerial"
+    end,
+    keys = {
+      {
+        "<leader>ta",
+        "<cmd>Telescope aerial<cr>",
+        desc = "Aerial Code Outline",
+      },
+    },
+  },
+  {
+    "enchantednatures/topsail.nvim",
+    -- dir = "~/dev/topsail.nvim",
+    lazy = true,
+    --- @type TopsailConfig
+    opts = {
+      notify = true,
+      default_register = function() return "x" end,
+      keymaps = {
+        apply = "<leader>ka",
+        create = "<leader>kc",
+        copy = "<leader>ky",
+      },
+    },
+    cmd = {
+      "KubernetesApply",
+      "KubernetesCreate",
+    },
+    config = function(_, opts) require("topsail").setup(opts) end,
+    keys = {
+      {
+        "<leader>ky",
+        function() require("topsail").copy_resource() end,
+        desc = "Copy current YAML resource to register",
+      },
+      {
+        "<leader>tc",
+        function()
+          require("telescope").load_extension "topsail"
+          require("telescope").extensions.topsail.workspace()
+        end,
+        desc = "Find Kubernetes Resources (Workspace)",
+      },
+    },
   },
 }

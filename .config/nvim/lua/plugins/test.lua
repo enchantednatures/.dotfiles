@@ -2,71 +2,50 @@ return {
   {
     "nvim-neotest/neotest",
     lazy = true,
-    ft = { "python", "go", "rust", "cpp", "cs" },
-    event = { "BufReadPre", "BufNewFile", "VeryLazy" },
+    ft = { "python", "go", "rust", "cpp", "cs" }, -- load only for these filetypes
+    cmd = { "NeotestRun", "NeotestAttach", "NeotestSummary", "NeotestOutput" },
+    keys = {
+      {
+        "<leader>TF",
+        function() require("neotest").run.run { vim.fn.expand "%", strategy = "dap" } end,
+        desc = "Debug File",
+      },
+      {
+        "<leader>TL",
+        function() require("neotest").run.run_last { strategy = "dap" } end,
+        desc = "Debug Last",
+      },
+      { "<leader>Ta", function() require("neotest").run.attach() end, desc = "Attach" },
+      { "<leader>Tf", function() require("neotest").run.run(vim.fn.expand "%") end, desc = "File" },
+      { "<leader>Tl", function() require("neotest").run.run_last() end, desc = "Last" },
+      { "<leader>Tn", function() require("neotest").run.run() end, desc = "Nearest" },
+      {
+        "<leader>TN",
+        function() require("neotest").run.run { strategy = "dap" } end,
+        desc = "Debug Nearest",
+      },
+      {
+        "<leader>TO",
+        function() require("neotest").output.open { enter = true } end,
+        desc = "Output",
+      },
+      { "<leader>Ts", function() require("neotest").run.stop() end, desc = "Stop" },
+      { "<leader>TS", function() require("neotest").summary.toggle() end, desc = "Summary" },
+    },
     dependencies = {
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-plenary",
       "nvim-neotest/neotest-vim-test",
       "Issafalcon/neotest-dotnet",
       "alfaix/neotest-gtest",
-      { "fredrikaverpil/neotest-golang", version = "*", dependencies = { "leoluz/nvim-dap-go" } },
-    },
-    keys = {
       {
-        "<leader>TF",
-        "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>",
-        desc = "Debug File",
-      },
-      {
-        "<leader>TL",
-        "<cmd>lua require('neotest').run.run_last({strategy = 'dap'})<cr>",
-        desc = "Debug Last",
-      },
-      {
-        "<leader>Ta",
-        "<cmd>lua require('neotest').run.attach()<cr>",
-        desc = "Attach",
-      },
-      {
-        "<leader>Tf",
-        "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>",
-        desc = "File",
-      },
-      {
-        "<leader>Tl",
-        "<cmd>lua require('neotest').run.run_last()<cr>",
-        desc = "Last",
-      },
-      {
-        "<leader>Tn",
-        "<cmd>lua require('neotest').run.run()<cr>",
-        desc = "Nearest",
-      },
-      {
-        "<leader>TN",
-        "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>",
-        desc = "Debug Nearest",
-      },
-      {
-        "<leader>TO",
-        "<cmd>lua require('neotest').output.open({ enter = true })<cr>",
-        desc = "Output",
-      },
-      {
-        "<leader>Ts",
-        "<cmd>lua require('neotest').run.stop()<cr>",
-        desc = "Stop",
-      },
-      {
-        "<leader>TS",
-        "<cmd>lua require('neotest').summary.toggle()<cr>",
-        desc = "Summary",
+        "fredrikaverpil/neotest-golang",
+        version = "*",
+        dependencies = { "leoluz/nvim-dap-go" },
       },
     },
-
     config = function()
-      local opts = {
+      require("neotest").setup {
         adapters = {
           require "neotest-python" {
             dap = { justMyCode = false },
@@ -79,16 +58,12 @@ return {
           require "rustaceanvim.neotest",
           require "neotest-golang" {},
           require "neotest-dotnet" {
-            dap = {
-              adapter_name = "coreclr",
-              enabled = true,
-            },
+            dap = { adapter_name = "coreclr", enabled = true },
             discovery_root = "solution",
             discovery_recursive = true,
             output_live = true,
           },
         },
-        -- overseer.nvim
         consumers = {
           overseer = require "neotest.consumers.overseer",
         },
@@ -96,19 +71,21 @@ return {
           enabled = true,
           force_default = true,
         },
-        strategies = {},
       }
-      require("neotest").setup(opts)
     end,
   },
   {
     "stevearc/overseer.nvim",
     lazy = true,
-    event = { "VeryLazy" },
-    cmd = { "OverseerRunCmd", "OverseerToggle" },
+    cmd = {
+      "OverseerRunCmd",
+      "OverseerToggle",
+      "OverseerBuild",
+      "OverseerOpen",
+      "OverseerRun",
+    },
     keys = {
       { "<leader>oR", "<cmd>OverseerRunCmd<cr>", desc = "Run Command" },
-
       { "<leader>oa", "<cmd>OverseerTaskAction<cr>", desc = "Task Action" },
       { "<leader>ob", "<cmd>OverseerBuild<cr>", desc = "Build" },
       { "<leader>oc", "<cmd>OverseerClose<cr>", desc = "Close" },
@@ -122,7 +99,14 @@ return {
     },
     config = function()
       require("overseer").setup {
-        templates = { "builtin", "user.dotnet-test", "user.docker-compose", "user.go", "user.go-build", "user.rust" }, -- //"user.neotest"
+        templates = {
+          "builtin",
+          "user.dotnet-test",
+          "user.docker-compose",
+          "user.go",
+          "user.go-build",
+          "user.rust",
+        },
         component_aliases = {
           default_neotest = {
             "on_output_summarize",

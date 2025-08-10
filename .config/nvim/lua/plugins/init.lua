@@ -28,21 +28,8 @@ return {
     },
   },
   {
-    "rcarriga/nvim-notify",
-    event = "VeryLazy",
-    opts = {
-      timeout = 3000,
-      background_colour = "#000000",
-      max_height = function() return math.floor(vim.o.lines * 0.25) end,
-      max_width = function() return math.floor(vim.o.columns * 0.25) end,
-    },
-    config = function(_, opts)
-      require("notify").setup(opts)
-      vim.notify = require "notify"
-    end,
-  },
-  {
     "andymass/vim-matchup",
+    lazy = true,
     event = { "BufReadPost" },
     config = function() vim.g.matchup_matchparen_offscreen = { method = "popup" } end,
   },
@@ -50,13 +37,11 @@ return {
     "nvim-tree/nvim-web-devicons",
     config = function() require("nvim-web-devicons").setup {} end,
   },
-  { 
-    "andweeb/presence.nvim", 
-    lazy = true, 
+  {
+    "andweeb/presence.nvim",
+    lazy = true,
     event = "User FileOpened",
-    cond = function()
-      return vim.fn.executable("discord") == 1
-    end
+    cond = function() return vim.fn.executable "discord" == 1 end,
   },
   { "editorconfig/editorconfig-vim" },
   { import = "plugins.languages.csharp", enabled = config.use_dotnet },
@@ -203,15 +188,15 @@ return {
         end,
         desc = "Flash"
       },
-      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r", mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R", mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       -- { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
   {
     "monaqa/dial.nvim",
-    keys = { 
+    keys = {
       { "<C-a>", function() require("dial.map").inc_normal()() end, desc = "Increment" },
       { "<C-x>", function() require("dial.map").dec_normal()() end, desc = "Decrement" },
       { "<C-a>", function() require("dial.map").inc_visual()() end, mode = "v", desc = "Increment" },

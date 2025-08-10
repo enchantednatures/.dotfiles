@@ -3,7 +3,6 @@ return {
     "mrcjkb/rustaceanvim",
     version = "^6",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile", "VeryLazy" },
     ft = { "rust", "toml" },
     config = function()
       local codelldb_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/bin/codelldb")

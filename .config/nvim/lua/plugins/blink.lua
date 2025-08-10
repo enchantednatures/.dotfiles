@@ -1,9 +1,11 @@
 return {
   "saghen/blink.cmp",
+  -- ft = { "lua", "python", "go", "rust", "javascript", "typescript", "html", "css" },
   version = "1.*",
+  lazy = true,
+  event = "InsertEnter",
   opts = {
     signature = { enabled = true },
-
     enabled = function()
       local disabled_ft = {
         "NvimTree",

@@ -128,13 +128,12 @@ vim.lsp.enable {
   "dockerls",
   "dockerfile-language-server",
   "docker_compose_language_service",
-  "denols",
+  -- "denols",
   "graphql",
   "jsonls",
   "lua_ls",
   "ruff",
   "terraform-ls",
-  -- "ts-ls",
   "yamlls",
 }
 
