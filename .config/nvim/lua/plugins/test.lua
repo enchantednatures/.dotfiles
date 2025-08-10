@@ -55,7 +55,9 @@ return {
           require "neotest-vim-test" {
             ignore_file_types = { "python", "vim", "lua" },
           },
-          require "rustaceanvim.neotest",
+          require "rustaceanvim.neotest" {
+            args = { "--archive-format", "auto" },
+          },
           require "neotest-golang" {},
           require "neotest-dotnet" {
             dap = { adapter_name = "coreclr", enabled = true },

@@ -8,7 +8,6 @@ return {
     dashboard.section.buttons.val = {
       dashboard.button("e", "󰺾 " .. " Explorer", ":NvimTreeToggle <CR>"),
       dashboard.button("m", "󱡁 " .. " Marks", ":Telescope marks <CR>"),
-      dashboard.button("SPC f", " " .. " Find file", ":Telescope find_files <CR>"),
       dashboard.button("d", " " .. " Database", ":Dbee<CR>"),
       dashboard.button("p", "" .. " Pull Requests", ":Octo pr list <CR>"),
       dashboard.button("i", "" .. " Github Issues", ":Octo issue list <CR>"),
@@ -20,7 +19,7 @@ return {
       dashboard.button("T", " " .. " Todo", ":TodoTelescope <CR>"),
       dashboard.button("g", "󰊢" .. " Git", ":Neogit <CR>"),
       dashboard.button("a", "󱐏" .. " New AI Chat", ":CodeCompanionChat <CR>"),
-      dashboard.button("k", "󱃾" .. " Kubernetes Resources", ":Telescope topsail workspace <CR>"),
+      dashboard.button("SPC k", "󱃾" .. " Kubernetes Resources", ":Telescope topsail workspace <CR>"),
       dashboard.button("c", "󰊢" .. " GitHub Actions", ":Octo run list <CR>"),
       dashboard.button(".", " " .. " Config", ":e $MYVIMRC <CR>"),
       dashboard.button("l", "󰒲" .. " Lazy", ":Lazy<CR>"),

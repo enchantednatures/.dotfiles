@@ -59,14 +59,13 @@ return {
       disabled_filetypes = { "help", "text", "markdown", "alpha", "Telescope" },
     },
   },
-  {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    event = "VeryLazy",
-    config = function() require("lsp_lines").setup() end,
-  },
+  -- {
+  --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  --   event = "VeryLazy",
+  --   config = function() require("lsp_lines").setup() end,
+  -- },
   {
     "windwp/nvim-spectre",
-    event = "VeryLazy",
     keys = {
       { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
@@ -152,13 +151,11 @@ return {
   },
   {
     "jinh0/eyeliner.nvim",
-    lazy = false,
-    config = function()
-      require("eyeliner").setup {
-        highlight_on_key = true, -- show highlights only after keypress
-        dim = true, -- dim all other characters if set to true (recommended!)
-      }
-    end,
+    event = "VeryLazy",
+    opts = {
+      highlight_on_key = true, -- show highlights only after keypress
+      dim = true, -- dim all other characters if set to true (recommended!)
+    },
   },
   {
     "folke/flash.nvim",

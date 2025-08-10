@@ -1,8 +1,6 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    -- lazy = true,
-    -- event = { "VeryLazy", "BufReadPost" },
     dependencies = {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "nvim-telescope/telescope-file-browser.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
@@ -58,7 +56,7 @@ return {
       },
       {
         "<leader>ff",
-        require("telescope.builtin").find_files,
+        function() require("telescope.builtin").find_files() end,
         desc = "Find Files",
       },
       {

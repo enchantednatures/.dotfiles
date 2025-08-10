@@ -1,14 +1,12 @@
 local function is_sops_file()
-  local filepath = vim.fn.expand("%:p")
-  return filepath:match("%.sops%.ya?ml$")
+  local filepath = vim.fn.expand "%:p"
+  return filepath:match "%.sops%.ya?ml$"
 end
 
 local function is_sops_encrypted()
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
   for _, line in ipairs(lines) do
-    if line:match("^%s*sops:%s*") then
-      return true
-    end
+    if line:match "^%s*sops:%s*" then return true end
   end
   return false
 end
@@ -17,7 +15,7 @@ local function decrypt_into_buffer(filepath)
   local cmd = string.format("sops --decrypt %s", vim.fn.shellescape(filepath))
   local handle = io.popen(cmd)
   if not handle then return false end
-  local decrypted = handle:read("*a")
+  local decrypted = handle:read "*a"
   handle:close()
 
   if decrypted and decrypted ~= "" then
@@ -30,20 +28,21 @@ local function decrypt_into_buffer(filepath)
   return false
 end
 
-local function encrypt_from_buffer(filepath)
-  -- Create a temp file with the same extension so .sops.yaml rules match
-  local tmpfile = filepath .. ".tmp.yaml"
-  vim.api.nvim_command("write! " .. vim.fn.fnameescape(tmpfile))
+-- encrypt the current buffer using the real file name
+-- so that .sops.yaml rules are applied.
+-- Returns true on success, false otherwise.
+local function encrypt_from_buffer(filepath, config_path)
+  -- Write current buffer to its file (creates/overwrites the target file)
+  vim.cmd("write! " .. vim.fn.fnameescape(filepath))
 
-  -- Encrypt temp file into the real file path
-  local cmd = string.format(
-    "sops --encrypt %s > %s",
-    vim.fn.shellescape(tmpfile),
-    vim.fn.shellescape(filepath)
-  )
+  -- Resolve the .sops.yaml file to use (default: ./.sops.yaml)
+  local cfg = config_path or vim.fn.getcwd() .. "/.sops.yaml"
+  local escaped_cfg = vim.fn.shellescape(cfg)
+
+  -- Build command: set SOPS_CONFIG env var and encrypt in‑place.
+  local cmd = string.format("SOPS_CONFIG=%s sops --encrypt -i %s", escaped_cfg, vim.fn.shellescape(filepath))
+
   local result = os.execute(cmd)
-  os.remove(tmpfile)
-
   return result == 0
 end
 
@@ -55,11 +54,9 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   group = sops_group,
   pattern = { "*.sops.yaml", "*.sops.yml" },
   callback = function()
-    local filepath = vim.fn.expand("%:p")
+    local filepath = vim.fn.expand "%:p"
     if is_sops_file() and is_sops_encrypted() then
-      if decrypt_into_buffer(filepath) then
-        vim.notify("SOPS file decrypted in buffer", vim.log.levels.DEBUG)
-      end
+      if decrypt_into_buffer(filepath) then vim.notify("SOPS file decrypted in buffer", vim.log.levels.DEBUG) end
     end
   end,
 })
@@ -69,7 +66,7 @@ vim.api.nvim_create_autocmd("BufWriteCmd", {
   group = sops_group,
   pattern = { "*.sops.yaml", "*.sops.yml" },
   callback = function()
-    local filepath = vim.fn.expand("%:p")
+    local filepath = vim.fn.expand "%:p"
     if is_sops_file() and not is_sops_encrypted() then
       if encrypt_from_buffer(filepath) then
         vim.notify("SOPS file encrypted on disk", vim.log.levels.DEBUG)
@@ -80,7 +77,7 @@ vim.api.nvim_create_autocmd("BufWriteCmd", {
       end
     else
       -- If it's already encrypted, just write normally
-      vim.cmd("write")
+      vim.cmd "write"
     end
   end,
 })

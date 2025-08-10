@@ -28,9 +28,5 @@
         "baseURL": "http://gateway-2:11434/v1"
       }
     }
-  },
-  "discord":{
-    "enabled": true,
-    "showModel": true
   }
 }
