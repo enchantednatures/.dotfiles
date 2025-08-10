@@ -33,8 +33,9 @@ $time\
 $cmd_duration\
 """
 
-# Disable the blank line at the start of the prompt
-# add_newline = false
+add_newline = false
+
+command_timeout = 100  
 
 # You can also replace your username with a neat symbol like   or disable this
 # and use the os module below
@@ -49,7 +50,7 @@ disabled = false
 # represents the current operating system
 [os]
 style = "bg:#9A348E"
-disabled = true # Disabled by default
+disabled = false # Disabled by default
 
 [directory]
 style = "bg:#DA627D"
@@ -63,12 +64,8 @@ truncation_symbol = "…/"
 "Music" = " "
 "Pictures" = " "
 
-[c]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
 [docker_context]
+disabled = true
 symbol = " "
 style = "bg:#06969A"
 format = '[ $symbol $context ]($style)'
@@ -87,11 +84,6 @@ added_style = 'bold green'
 format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
 disabled = false
 
-[golang]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
 [rust]
 symbol = ""
 style = "bg:#86BBD8"
@@ -104,7 +96,7 @@ style = "bg:#86BBD8"
 format = '[$symbol$context( \($namespace\))]($style) in '
 
 [time]
-disabled = false
+disabled = true
 time_format = "%R" # Hour:Minute Format
 style = "bg:#33658A"
 format = '[ ♥ $time ]($style)'
