@@ -50,7 +50,14 @@ return {
     "nvim-tree/nvim-web-devicons",
     config = function() require("nvim-web-devicons").setup {} end,
   },
-  { "andweeb/presence.nvim", lazy = true, event = "VeryLazy" },
+  { 
+    "andweeb/presence.nvim", 
+    lazy = true, 
+    event = "User FileOpened",
+    cond = function()
+      return vim.fn.executable("discord") == 1
+    end
+  },
   { "editorconfig/editorconfig-vim" },
   { import = "plugins.languages.csharp", enabled = config.use_dotnet },
   { import = "plugins.dbee.init" },
@@ -60,7 +67,7 @@ return {
   { import = "plugins.languages.python", enabled = config.use_python },
   {
     "m4xshen/smartcolumn.nvim",
-    lazy = false,
+    event = "BufReadPost",
     opts = {
       colorcolumn = "80",
       scope = "line",
@@ -117,7 +124,6 @@ return {
   {
     "numToStr/Comment.nvim",
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
-    lazy = false,
     keys = { "gc", "gcc", "gbc" },
     config = function(_, _)
       local opts = {
@@ -205,24 +211,14 @@ return {
   },
   {
     "monaqa/dial.nvim",
-    keys = { "<C-a>", "<C-x>", { "<C-a>", "v" }, { "<C-x>", "v" }, { "g<C-a>", "v" }, { "g<C-x>", "v" } },
-    event = "VeryLazy",
-    lazy = true,
-    -- stylua: ignore
-    init = function()
-      vim.api.nvim_set_keymap("n", "<C-a>", require("dial.map").inc_normal(),
-        { desc = "Increment", noremap = true })
-      vim.api.nvim_set_keymap("n", "<C-x>", require("dial.map").dec_normal(),
-        { desc = "Decrement", noremap = true })
-      vim.api.nvim_set_keymap("v", "<C-a>", require("dial.map").inc_visual(),
-        { desc = "Increment", noremap = true })
-      vim.api.nvim_set_keymap("v", "<C-x>", require("dial.map").dec_visual(),
-        { desc = "Decrement", noremap = true })
-      vim.api.nvim_set_keymap("v", "g<C-a>", require("dial.map").inc_gvisual(),
-        { desc = "Increment", noremap = true })
-      vim.api.nvim_set_keymap("v", "g<C-x>", require("dial.map").dec_gvisual(),
-        { desc = "Decrement", noremap = true })
-    end,
+    keys = { 
+      { "<C-a>", function() require("dial.map").inc_normal()() end, desc = "Increment" },
+      { "<C-x>", function() require("dial.map").dec_normal()() end, desc = "Decrement" },
+      { "<C-a>", function() require("dial.map").inc_visual()() end, mode = "v", desc = "Increment" },
+      { "<C-x>", function() require("dial.map").dec_visual()() end, mode = "v", desc = "Decrement" },
+      { "g<C-a>", function() require("dial.map").inc_gvisual()() end, mode = "v", desc = "Increment" },
+      { "g<C-x>", function() require("dial.map").dec_gvisual()() end, mode = "v", desc = "Decrement" },
+    },
   },
   {
     "kevinhwang91/nvim-ufo",
@@ -267,13 +263,12 @@ return {
   },
   {
     "mistweaverco/kulala.nvim",
-    event = "VeryLazy",
+    ft = { "http", "rest" },
     keys = {
       { "<leader>Rs", desc = "Send request" },
       { "<leader>Ra", desc = "Send all requests" },
       { "<leader>Rb", desc = "Open scratchpad" },
     },
-    ft = { "http", "rest" },
     opts = {
       -- your configuration comes here
       global_keymaps = true,
@@ -324,7 +319,7 @@ return {
     -- Optional dependencies
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
     -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
-    lazy = false,
+    cmd = "Oil",
+    keys = { { "-", "<cmd>Oil<cr>", desc = "Open parent directory" } },
   },
 }
