@@ -2,7 +2,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     lazy = true,
-    event = { "VeryLazy" },
+    event = { "VeryLazy", "BufReadPost" },
     dependencies = {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "nvim-telescope/telescope-file-browser.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
@@ -71,9 +71,9 @@ return {
         },
       },
       {
-        -- "enchantednatures/topsail.nvim",
-        dir = "~/dev/topsail.nvim",
-        lazy = false,
+        "enchantednatures/topsail.nvim",
+        -- dir = "~/dev/topsail.nvim",
+        lazy = true,
         --- @type TopsailConfig
         opts = {
           notify = true,
@@ -86,7 +86,6 @@ return {
         },
         config = function(_, opts) require("topsail").setup(opts) end,
         keys = {
-
           {
             "<leader>ky",
             function() require("topsail").copy_resource() end,
@@ -145,13 +144,11 @@ return {
         require("utils").find_files,
         desc = "Find Files",
       },
-
       {
         "<leader>ff",
         require("telescope.builtin").find_files,
         desc = "Find Files",
       },
-
       {
         "<leader><tab>",
         "<Cmd>lua require('telescope.builtin').commands()<CR>",
