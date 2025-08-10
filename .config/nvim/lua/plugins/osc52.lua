@@ -1,6 +1,7 @@
 return {
   "ojroques/vim-oscyank",
   event = "VeryLazy",
+  enabled = false,
   dependencies = {
     "ojroques/nvim-osc52",
   },

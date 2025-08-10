@@ -27,18 +27,15 @@ set -gx EDITOR nvim
 # Set platform-specific configurations
 switch (uname)
     case Darwin
-        set -gx K9S_CONFIG_DIR "$HOME/.config/k9s/"
         fish_add_path /opt/homebrew/bin
         fish_add_path /opt/homebrew/opt/openjdk@17/bin
         fish_add_path /Users/hcasten/.deno/bin
-        alias claude="/Users/hcasten/.claude/local/claude"
         # macOS specific pbcopy for pubkey
         alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
         # macOS specific LM Studio path
         set -gx PATH $PATH /Users/hcasten/.cache/lm-studio/bin
-    case Linux
-        set -gx K9S_CONFIG_DIR "$HOME/.config/k9s/"
 end
+set -gx K9S_CONFIG_DIR "$HOME/.config/k9s/"
 set -gx ATAC_KEY_BINDINGS $HOME/.config/atac.toml
 
 set -gx OPEN_WEBUI_API_KEY (atuin kv get open_webui)
