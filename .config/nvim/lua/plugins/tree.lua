@@ -47,7 +47,7 @@ return {
     respect_buf_cwd = true,
     git = {
       enable = true,
-      timeout = 500, -- Increase timeout for git
+      timeout = 200, -- Reduced timeout for better performance
       ignore = false, -- Don't ignore files in .gitignore
     },
     view = {
