@@ -54,7 +54,7 @@ return {
               },
               assist = {
                 importEnforceGranularity = true,
-                importPrefix = "create",
+                importPrefix = "crate",
               },
               imports = {
                 granularity = {
@@ -118,6 +118,12 @@ return {
                   "po",
                   "screenshots",
                   "target",
+                },
+                watcherExclude = {
+                  "**/target/**",
+                  "**/node_modules/**",
+                  "**/.git/**",
+                  "**/.venv/**",
                 },
               },
             },
