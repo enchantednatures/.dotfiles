@@ -1,7 +1,7 @@
 local augroups = require "config.autocommands.augroups"
 
 local function lsp_highlight(client, bufnr)
-  if client.supports_method "textDocument/documentHighlight" then
+  if client:supports_method "textDocument/documentHighlight" then
     vim.api.nvim_create_augroup("lsp_document_highlight", {
       clear = false,
     })

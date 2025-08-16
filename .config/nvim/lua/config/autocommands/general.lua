@@ -59,7 +59,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroups.general_settings,
   pattern = "*",
   desc = "Highlight text on yank",
-  callback = function() vim.highlight.on_yank { higroup = "Search", timeout = 200 } end,
+  callback = function() vim.hl.on_yank { higroup = "Search", timeout = 200 } end,
 })
 
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {

@@ -125,6 +125,7 @@ vim.lsp.enable {
   "lua_ls",
   "ruff",
   "terraform-ls",
+  -- "rust-analyzer",
   "yamlls",
 }
 

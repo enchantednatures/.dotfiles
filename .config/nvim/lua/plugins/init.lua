@@ -2,6 +2,7 @@ local config = require("config.config").opts
 return {
   -- { "rebelot/kanagawa.nvim", lazy = false, priority = 1000 },
   { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
+  { "neovim/nvim-lspconfig", lazy = false },
   {
     "utilyre/barbecue.nvim",
     event = "VeryLazy",

@@ -125,11 +125,19 @@ return {
           proto = { "buf" },
           markdown = { "cbfmt", "deno_fmt" },
           c = { "clang_format" },
+          python = function(bufnr)
+            if require("conform").get_formatter_info("ruff_format", bufnr).available then
+              return { "ruff_format" }
+            else
+              return { "isort", "black" }
+            end
+          end,
           cpp = { "clang_format" },
           cmake = { "cmake_format" },
           go = { "goimports", "goimports_reviser", "gofumpt" },
           html = { "htmlbeautifier", "deno_fmt" },
-          rust = { "leptosfmt" },
+          toml = { "taplo" },
+          rust = { "rustfmt", "leptosfmt", lsp_format = "fallback" },
           json = { "prettierd" },
           typescript = { "deno_fmt" },
           javascript = { "deno_fmt" },

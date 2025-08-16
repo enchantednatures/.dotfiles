@@ -54,11 +54,11 @@ return {
         require("utils").find_files,
         desc = "Find Files",
       },
-      {
-        "<leader>ff",
-        function() require("telescope.builtin").find_files() end,
-        desc = "Find Files",
-      },
+      -- {
+      --   "<leader>ff",
+      --   function() require("telescope.builtin").find_files() end,
+      --   desc = "Find Files",
+      -- },
       {
         "<leader><tab>",
         "<Cmd>lua require('telescope.builtin').commands()<CR>",
