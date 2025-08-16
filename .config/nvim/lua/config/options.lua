@@ -11,6 +11,12 @@ vim.opt.diffopt = {
   "indent-heuristic",
   "iwhite", -- I toggle this one, it doesn't fit all cases.
 }
+local opt = vim.opt
+opt.signcolumn = "yes:1" -- Always show sign column
+opt.termguicolors = true -- Enable true colors
+opt.ignorecase = true -- Ignore case in search
+opt.swapfile = false -- Disable swap files
+
 -- vim.o.formatoptions = "jcroqlnt"
 -- vim.o.shortmess = "filnxtToOFWIcC"
 -- vim.opt.breakindent = true

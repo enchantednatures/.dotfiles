@@ -5,6 +5,7 @@ k9s:
     lockFavorites: false
     favorites:
       - all
+      - dnddy
       - default
   view:
     active: v1/pods

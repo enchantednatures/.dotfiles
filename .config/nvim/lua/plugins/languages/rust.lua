@@ -31,8 +31,6 @@ return {
               { desc = "[C]argo [B]uild" },
               { buffer = bufnr }
             )
-
-            vim.lsp.inlay_hint.enable()
           end,
           rustc = {
             default_edition = "2024",
@@ -57,7 +55,7 @@ return {
               },
               imports = {
                 granularity = {
-                  group = "Item",
+                  group = "item",
                 },
                 prefix = "self",
               },
