@@ -1,6 +1,7 @@
 -- local indent = 2
 
 vim.lsp.set_log_level "warn"
+vim.opt.swapfile = false
 vim.opt.diffopt = {
   "internal",
   "filler",

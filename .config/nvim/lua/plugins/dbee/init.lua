@@ -1,6 +1,5 @@
 return {
   dir = "~/dev/nvim-dbee",
-  lazy = true,
   cmd = { "Dbee" },
   keys = {
     { "<leader>DB", "<cmd>Dbee<cr>", desc = "DBee" },

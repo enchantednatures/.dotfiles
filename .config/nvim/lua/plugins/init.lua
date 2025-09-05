@@ -1,6 +1,5 @@
 local config = require("config.config").opts
 return {
-  -- { "rebelot/kanagawa.nvim", lazy = false, priority = 1000 },
   { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
   { "neovim/nvim-lspconfig", lazy = false },
   {
@@ -15,7 +14,7 @@ return {
   },
   "nvim-lua/plenary.nvim",
   { "b0o/schemastore.nvim", event = { "VeryLazy" } },
-  { "f-person/git-blame.nvim", event = "BufReadPost" },
+  -- { "f-person/git-blame.nvim", event = "BufReadPost" },
   { "tpope/vim-abolish", cmd = "Abolish", lazy = true, event = "VeryLazy" },
   { "tpope/vim-surround", event = "BufReadPre" },
   {
@@ -38,19 +37,14 @@ return {
     "nvim-tree/nvim-web-devicons",
     config = function() require("nvim-web-devicons").setup {} end,
   },
-  {
-    "andweeb/presence.nvim",
-    lazy = true,
-    event = "User FileOpened",
-    cond = function() return vim.fn.executable "discord" == 1 end,
-  },
+  -- {
+  --   "andweeb/presence.nvim",
+  --   lazy = true,
+  --   event = "User FileOpened",
+  --   cond = function() return vim.fn.executable "discord" == 1 end,
+  -- },
   { "editorconfig/editorconfig-vim" },
-  { import = "plugins.languages.csharp", enabled = config.use_dotnet },
   { import = "plugins.dbee.init" },
-  { import = "plugins.languages.typescript" },
-  { import = "plugins.languages.go", enabled = config.use_go },
-  { import = "plugins.languages.rust", enabled = config.use_rust },
-  { import = "plugins.languages.python", enabled = config.use_python },
   {
     "m4xshen/smartcolumn.nvim",
     event = "BufReadPost",
@@ -74,6 +68,7 @@ return {
   {
     "akinsho/nvim-bufferline.lua",
     event = "VeryLazy",
+    enabled = false,
     opts = {
       options = {
         mode = "tabs", -- tabs or buffers
@@ -161,7 +156,6 @@ return {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
     opts = {
       modes = {
         char = {
@@ -293,16 +287,5 @@ return {
         },
       },
     },
-  },
-  {
-    "stevearc/oil.nvim",
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = {},
-    -- Optional dependencies
-    dependencies = { { "echasnovski/mini.icons", opts = {} } },
-    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-    cmd = "Oil",
-    keys = { { "-", "<cmd>Oil<cr>", desc = "Open parent directory" } },
   },
 }

@@ -5,10 +5,10 @@ k9s:
     lockFavorites: false
     favorites:
       - all
-      - dnddy
       - default
+      - dnddy
   view:
-    active: v1/pods
+    active: v1/pods all
   featureGates:
     nodeShell: false
   proxy: null

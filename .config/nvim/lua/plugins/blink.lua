@@ -49,25 +49,26 @@ return {
       ["<CR>"] = { "accept", "fallback" },
       ["<Tab>"] = {
         function(cmp)
-          local luasnip = require "luasnip"
-          if cmp.snippet_active() then
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-              return
-            else
-              return cmp.accept()
-            end
-          else
-            return cmp.select_and_accept()
-          end
+          -- local luasnip = require "luasnip"
+          -- if cmp.snippet_active() then
+          --   if luasnip.expand_or_locally_jumpable() then
+          --     luasnip.expand_or_jump()
+          --     return
+          --   else
+          --     return cmp.accept()
+          --   end
+          -- else
+          --   return cmp.select_and_accept()
+          -- end
+          return cmp.select_and_accept()
         end,
-        "snippet_forward",
+        -- "snippet_forward",
         "fallback",
       },
-      ["<S-Tab>"] = { "snippet_backward", "fallback" },
+      -- ["<S-Tab>"] = { "snippet_backward", "fallback" },
       ["ESC"] = {
         function(cmp)
-          if cmp.snippet_active() then return cmp.cancel() end
+          -- if cmp.snippet_active() then return cmp.cancel() end
           return cmp.hide()
         end,
       },
@@ -149,9 +150,14 @@ return {
         show_without_menu = true,
       },
     },
-    snippets = { preset = "luasnip" },
+    -- snippets = { preset = "luasnip" },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = {
+        "lsp",
+        "path",
+        -- "snippets",
+        "buffer",
+      },
       per_filetype = {
         codecompanion = { "codecompanion" },
       },
@@ -164,9 +170,9 @@ return {
           min_keyword_length = 3,
           score_offset = -10,
         },
-        snippets = {
-          min_keyword_length = 3,
-        },
+        -- snippets = {
+        --   min_keyword_length = 3,
+        -- },
       },
     },
     fuzzy = { implementation = "rust" },

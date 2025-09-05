@@ -10,8 +10,6 @@ return {
       "nvim-neotest/neotest-go",
     },
     build = ':lua require("go.install").update_all_sync()',
-    lazy = true,
-    -- event = { "CmdlineEnter" },
     config = function()
       -- Fix neotest-go test detection
       local neotest = require "neotest"

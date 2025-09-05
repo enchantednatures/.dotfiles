@@ -1,1 +1,29 @@
 vim.setfiletype = "aql"
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "aql",
+--   callback = function()
+--     parser_config.aql = {
+--       install_info = {
+--         url = "~/dev/tree-sitter-aql/",
+--         files = { "src/parser.c" },
+--         branch = "main",
+--         generate_requires_npm = false,
+--         requires_generate_from_grammar = false,
+--         highlight = { enable = true },
+--       },
+--
+--       highlight = { enable = true },
+--       filetype = "aql",
+--     }
+--
+--     vim.filetype.add {
+--       extension = {
+--         aql = "aql",
+--       },
+--       filename = {
+--         ["aql"] = "aql",
+--       },
+--     }
+--   end,
+-- })

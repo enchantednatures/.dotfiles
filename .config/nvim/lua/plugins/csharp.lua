@@ -1,8 +1,6 @@
 return {
   {
     "Issafalcon/neotest-dotnet",
-    lazy = true,
-    event = { "BufReadPre" },
     ft = { "cs", "csproj" },
     dependencies = {
       "nvim-neotest/neotest",
@@ -30,8 +28,6 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
     },
-    lazy = true,
-    event = { "VeryLazy", "BufReadPre" },
     ft = { "cs", "csproj" },
     opts = {
       config = {
