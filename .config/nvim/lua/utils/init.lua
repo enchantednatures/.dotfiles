@@ -7,6 +7,9 @@ require "utils.diff"
 local diagnostics = require "utils.diagnostics"
 diagnostics:setup_diagnostics()
 
+-- Make python utilities available
+M.python = require "utils.python"
+
 -- Export platform detection
 M.platform = require "utils.platform"
 

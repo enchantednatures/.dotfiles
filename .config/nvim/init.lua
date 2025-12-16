@@ -91,7 +91,7 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
-vim.lsp.set_log_level "ERROR"
+vim.lsp.log.set_level "ERROR"
 vim.lsp.config("*", {
   root_markers = { ".git" },
 })
@@ -109,6 +109,7 @@ vim.lsp.enable {
   "denols",
   "graphql",
   "jsonls",
+  -- "ty",
   "lua_ls",
   "ruff",
   "terraform-ls",

@@ -350,9 +350,8 @@ return {
     },
     opts = { kcat_path = "/opt/homebrew/bin/kcat" },
   },
-  -- CNPG (lazy-load on key)
   {
-    dir = "~/dev/telescope-cnpg.nvim",
+    dir = "~/Developer/telescope-cnpg.nvim",
     keys = {
       {
         "<leader>tm",
@@ -364,7 +363,6 @@ return {
       },
     },
   },
-  -- Aerial (lazy-load on key)
   {
     "stevearc/aerial.nvim",
     lazy = true,

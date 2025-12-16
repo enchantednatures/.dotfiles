@@ -21,6 +21,7 @@ return {
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
+    "zbirenbaum/copilot.lua",
     "nvim-treesitter/nvim-treesitter",
     {
       "MeanderingProgrammer/render-markdown.nvim",
@@ -28,17 +29,22 @@ return {
     },
   },
   opts = {
+    adapters = {
+      acp = {
+        opencode = function() return require("codecompanion.adapters").extend("opencode", {}) end,
+      },
+    },
     strategies = {
       chat = {
-        adapter = "copilot",
+        adapter = "opencode",
         model = "gpt-5-mini",
       },
       inline = {
-        adapter = "copilot",
+        adapter = "opencode",
         model = "gpt-5-mini",
       },
       cmd = {
-        adapter = "copilot",
+        adapter = "opencode",
         model = "gpt-5-mini",
       },
     },

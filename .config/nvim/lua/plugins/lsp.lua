@@ -25,6 +25,7 @@ return {
           "bashls",
           "buf_ls",
           "clangd",
+          "denols",
           "docker_compose_language_service",
           "dockerls",
           "gh-actions-language-server",
@@ -80,7 +81,7 @@ return {
           "gomodifytags",
           "google_java_format",
           "impl",
-          "mypy",
+          -- "mypy",
           "prettier",
           "prettierd",
           "protolint",
@@ -104,7 +105,7 @@ return {
 
           -- Diagnostics
           nls.builtins.diagnostics.cmake_lint,
-          nls.builtins.diagnostics.mypy,
+          -- nls.builtins.diagnostics.mypy,
           nls.builtins.diagnostics.hadolint,
           nls.builtins.diagnostics.cppcheck,
           nls.builtins.diagnostics.golangci_lint,

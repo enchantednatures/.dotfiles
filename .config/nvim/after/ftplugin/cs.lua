@@ -4,12 +4,88 @@ vim.opt_local.shiftwidth = 4
 vim.opt_local.tabstop = 4
 vim.opt_local.softtabstop = 4
 vim.opt_local.textwidth = 120
+vim.opt_local.wrap = false
+
+-- Better folding for C# classes and methods
+vim.opt_local.foldmethod = "expr"
+vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt_local.foldlevel = 1
+
+-- Enable case-insensitive search for C# (common pattern)
+vim.opt_local.ignorecase = true
+vim.opt_local.smartcase = true
 
 -- Enable C# comment format options
 vim.opt_local.formatoptions:append "r" -- Auto-insert comment leader on <CR>
 vim.opt_local.formatoptions:append "o" -- Auto-insert comment leader on 'o' or 'O'
 vim.opt_local.formatoptions:append "q" -- Allow formatting of comments with gq
 vim.opt_local.formatoptions:append "c" -- Auto-wrap comments using textwidth
+
+-- C# specific keymaps for better navigation
+local opts = { buffer = true, silent = true }
+
+-- Quick navigation to methods and classes
+vim.keymap.set(
+  "n",
+  "]m",
+  "/\\v^\\s*(public|private|protected|internal).*\\{<CR>",
+  vim.tbl_extend("force", opts, { desc = "Next method" })
+)
+vim.keymap.set(
+  "n",
+  "[m",
+  "?\\v^\\s*(public|private|protected|internal).*\\{<CR>",
+  vim.tbl_extend("force", opts, { desc = "Previous method" })
+)
+vim.keymap.set(
+  "n",
+  "]c",
+  "/\\v^\\s*(public|internal)\\s+(class|interface|enum|struct)<CR>",
+  vim.tbl_extend("force", opts, { desc = "Next class" })
+)
+vim.keymap.set(
+  "n",
+  "[c",
+  "?\\v^\\s*(public|internal)\\s+(class|interface|enum|struct)<CR>",
+  vim.tbl_extend("force", opts, { desc = "Previous class" })
+)
+
+-- Quick test running shortcuts
+vim.keymap.set(
+  "n",
+  "<leader>tt",
+  function() require("neotest").run.run() end,
+  vim.tbl_extend("force", opts, { desc = "Run test under cursor" })
+)
+
+vim.keymap.set(
+  "n",
+  "<leader>tf",
+  function() require("neotest").run.run(vim.fn.expand "%") end,
+  vim.tbl_extend("force", opts, { desc = "Run tests in file" })
+)
+
+vim.keymap.set(
+  "n",
+  "<leader>td",
+  function() require("neotest").run.run { strategy = "dap" } end,
+  vim.tbl_extend("force", opts, { desc = "Debug test under cursor" })
+)
+
+-- Quick build commands
+vim.keymap.set(
+  "n",
+  "<leader>bb",
+  function() require("easy-dotnet").build_default_quickfix() end,
+  vim.tbl_extend("force", opts, { desc = "Build project" })
+)
+
+vim.keymap.set(
+  "n",
+  "<leader>br",
+  function() require("easy-dotnet").run_default() end,
+  vim.tbl_extend("force", opts, { desc = "Run project" })
+)
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "LspAttach", "BufReadPre", "BufWritePost" }, {
   pattern = "*",
@@ -65,5 +141,27 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "LspAttach", "BufReadPre", "BufWrit
     vim.lsp.codelens.refresh()
   end,
 })
+
+-- Auto-format and organize imports on save
+local cs_group = vim.api.nvim_create_augroup("CSharpIDE", { clear = true })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = cs_group,
+  pattern = "*.cs",
+  callback = function()
+    -- Format document
+    vim.lsp.buf.format { async = false }
+
+    -- Remove unnecessary usings
+    pcall(function() vim.cmd "CSFixUsings" end)
+  end,
+})
+
+-- Quick refactoring helpers
+vim.keymap.set("v", "<leader>re", function()
+  vim.lsp.buf.code_action {
+    filter = function(action) return action.title:match "Extract" or action.title:match "Refactor" end,
+  }
+end, vim.tbl_extend("force", opts, { desc = "Extract/Refactor selection" }))
 
 vim.cmd "compiler! dotnet"

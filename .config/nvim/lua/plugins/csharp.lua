@@ -1,34 +1,23 @@
 return {
   {
-    "Issafalcon/neotest-dotnet",
-    ft = { "cs", "csproj" },
-    dependencies = {
-      "nvim-neotest/neotest",
-      "mfussenegger/nvim-dap",
-    },
-    config = function()
-      local neotest_dotnet = require "neotest-dotnet"
-      require("neotest").setup {
-        adapters = {
-          neotest_dotnet {
-            dap = {
-              adapter_name = "coreclr",
-              enabled = true,
-            },
-            discovery_root = "solution",
-            discovery_recursive = true,
-            output_live = true,
-          },
-        },
-      }
-    end,
-  },
-  {
     "seblyng/roslyn.nvim",
     dependencies = {
       "williamboman/mason.nvim",
     },
-    ft = { "cs", "csproj" },
+    ft = { "cs", "csproj", "vb", "fsproj" },
+    keys = {
+      { "<leader>cr", function() vim.lsp.buf.code_action() end, desc = "Code Actions", ft = "cs" },
+      { "<leader>cR", function() vim.cmd "Roslyn.FixAll" end, desc = "Fix All Issues", ft = "cs" },
+      { "<leader>cd", function() vim.lsp.buf.definition() end, desc = "Go to Definition", ft = "cs" },
+      { "<leader>cD", function() vim.lsp.buf.declaration() end, desc = "Go to Declaration", ft = "cs" },
+      { "<leader>ci", function() vim.lsp.buf.implementation() end, desc = "Go to Implementation", ft = "cs" },
+      { "<leader>ct", function() vim.lsp.buf.type_definition() end, desc = "Go to Type Definition", ft = "cs" },
+      { "<leader>cu", function() vim.lsp.buf.references() end, desc = "Find References", ft = "cs" },
+      { "<leader>cn", function() vim.lsp.buf.rename() end, desc = "Rename Symbol", ft = "cs" },
+      { "<leader>cf", function() vim.lsp.buf.format() end, desc = "Format Document", ft = "cs" },
+      { "<leader>ch", function() vim.lsp.buf.hover() end, desc = "Show Documentation", ft = "cs" },
+      { "<leader>cs", function() vim.lsp.buf.signature_help() end, desc = "Signature Help", ft = "cs" },
+    },
     opts = {
       config = {
         roslyn_version = "latest",
@@ -36,6 +25,7 @@ return {
         settings = {
           ["csharp|completion"] = {
             dotnet_show_completion_items_from_unimported_namespaces = true,
+            dotnet_show_name_completion_suggestions = true,
           },
           ["csharp|code_lens"] = {
             dotnet_enable_references_code_lens = true,
@@ -51,25 +41,156 @@ return {
             dotnet_enable_inlay_hints_for_object_creation_parameters = true,
             dotnet_enable_inlay_hints_for_other_parameters = true,
             dotnet_enable_inlay_hints_for_parameters = true,
-            dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-            dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-            dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = false,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = false,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = false,
           },
           ["csharp|background_analysis"] = {
-            background_analysis = {
-              dotnet_analyzer_diagnostics_scope = "fullSolution",
-              dotnet_compiler_diagnostics_scope = "fullSolution",
-            },
+            dotnet_analyzer_diagnostics_scope = "fullSolution",
+            dotnet_compiler_diagnostics_scope = "fullSolution",
           },
           ["csharp|symbol_search"] = {
             dotnet_search_reference_assemblies = true,
           },
           ["csharp|formatting"] = {
             dotnet_organize_imports_on_format = true,
+            dotnet_sort_system_directives_first = true,
+          },
+          ["csharp|code_action"] = {
+            dotnet_enable_organize_imports_code_action = true,
+            dotnet_enable_remove_unnecessary_imports_code_action = true,
           },
         },
       },
     },
     config = function(_, opts) require("roslyn").setup(opts) end,
+  },
+  {
+    "Hoffs/omnisharp-extended-lsp.nvim",
+    ft = { "cs" },
+    config = function()
+      -- Enhanced go-to-definition for decompiled sources
+      local extended = require "omnisharp_extended"
+      vim.api.nvim_create_autocmd("LspAttach", {
+        pattern = "*.cs",
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client and client.name == "roslyn" then
+            vim.keymap.set(
+              "n",
+              "gd",
+              extended.lsp_definitions,
+              { buffer = args.buf, desc = "Go to Definition (Extended)" }
+            )
+            vim.keymap.set(
+              "n",
+              "gi",
+              extended.lsp_implementation,
+              { buffer = args.buf, desc = "Go to Implementation (Extended)" }
+            )
+            vim.keymap.set(
+              "n",
+              "gr",
+              extended.lsp_references,
+              { buffer = args.buf, desc = "Find References (Extended)" }
+            )
+            vim.keymap.set(
+              "n",
+              "gt",
+              extended.lsp_type_definition,
+              { buffer = args.buf, desc = "Go to Type Definition (Extended)" }
+            )
+          end
+        end,
+      })
+    end,
+  },
+  {
+    "GustavEikaas/easy-dotnet.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+    ft = { "cs", "csproj", "sln", "fsproj" },
+    keys = {
+      { "<leader>Db", function() require("easy-dotnet").build_default_quickfix() end, desc = "Build Project" },
+      { "<leader>Dr", function() require("easy-dotnet").run_default() end, desc = "Run Project" },
+      { "<leader>Dt", function() require("easy-dotnet").test_default() end, desc = "Test Project" },
+      { "<leader>Ds", function() require("easy-dotnet").restore() end, desc = "Restore Packages" },
+      { "<leader>Dc", function() require("easy-dotnet").clean() end, desc = "Clean Project" },
+      { "<leader>Dp", function() require("easy-dotnet").get_debug_dll() end, desc = "Pick Debug DLL" },
+      { "<leader>Dn", function() require("easy-dotnet").new() end, desc = "New Project/Solution" },
+      { "<leader>Da", function() require("easy-dotnet").add_package() end, desc = "Add NuGet Package" },
+      { "<leader>DR", function() require("easy-dotnet").remove_package() end, desc = "Remove NuGet Package" },
+    },
+    opts = {
+      get_sdk_path = function() return vim.fn.trim(vim.fn.system "dotnet --list-sdks | head -1 | cut -d' ' -f2") end,
+      auto_bootstrap_namespace = true,
+    },
+    config = function(_, opts)
+      require("easy-dotnet").setup(opts)
+      -- Auto-discover and set debug DLL for DAP
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "cs",
+        callback = function()
+          local dll_path = require("easy-dotnet").get_debug_dll()
+          if dll_path then
+            require("dap").configurations.cs = require("dap").configurations.cs or {}
+            table.insert(require("dap").configurations.cs, {
+              type = "coreclr",
+              name = "Launch " .. vim.fs.basename(dll_path),
+              request = "launch",
+              program = dll_path,
+            })
+          end
+        end,
+      })
+    end,
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    optional = true,
+    opts = function(_, opts)
+      -- Add C# specific file extensions and icons
+      opts.filesystem = opts.filesystem or {}
+      opts.filesystem.filtered_items = opts.filesystem.filtered_items or {}
+      opts.filesystem.filtered_items.hide_dotfiles = false
+      opts.filesystem.filtered_items.hide_hidden = false
+
+      -- Show solution and project files prominently
+      opts.filesystem.filtered_items.never_show = {
+        ".git",
+        "node_modules",
+        ".cache",
+      }
+
+      -- Custom commands for C# projects
+      opts.window = opts.window or {}
+      opts.window.mappings = opts.window.mappings or {}
+      opts.window.mappings["<leader>nb"] = {
+        function()
+          local node = require("neo-tree.sources.filesystem").get_node()
+          if node and (node.name:match "%.csproj$" or node.name:match "%.sln$") then
+            require("easy-dotnet").build_default_quickfix()
+          end
+        end,
+        desc = "Build C# project",
+      }
+      opts.window.mappings["<leader>nr"] = {
+        function()
+          local node = require("neo-tree.sources.filesystem").get_node()
+          if node and (node.name:match "%.csproj$" or node.name:match "%.sln$") then
+            require("easy-dotnet").run_default()
+          end
+        end,
+        desc = "Run C# project",
+      }
+      opts.window.mappings["<leader>nt"] = {
+        function()
+          local node = require("neo-tree.sources.filesystem").get_node()
+          if node and (node.name:match "%.csproj$" or node.name:match "%.sln$") then
+            require("easy-dotnet").test_default()
+          end
+        end,
+        desc = "Test C# project",
+      }
+    end,
   },
 }

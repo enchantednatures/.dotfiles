@@ -1,5 +1,6 @@
 return {
   "pmizio/typescript-tools.nvim",
+  enabled = false,
   lazy = true,
   ft = {
     "typescript",

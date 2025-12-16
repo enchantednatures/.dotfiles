@@ -16,6 +16,9 @@
 [core]
 	autocrlf = input
 	safecrlf = true
+	preloadindex = true
+	untrackedCache = true
+	fsmonitor = true
 [merge]
 	tool = nvim -d
 [alias]
@@ -44,3 +47,5 @@
 	compactionHeuristic = true
 [protocol]
 	version = 2
+[feature]
+	manyFiles = true
