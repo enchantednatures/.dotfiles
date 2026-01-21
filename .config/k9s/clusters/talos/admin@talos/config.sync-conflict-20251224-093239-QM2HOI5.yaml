@@ -1,0 +1,20 @@
+k9s:
+  cluster: talos
+  namespace:
+    active: all
+    lockFavorites: false
+    favorites:
+      - test-app
+      - vms
+      - networking
+      - monitoring
+      - all
+      - default
+      - flux-system
+      - harbor
+      - rook-ceph
+  view:
+    active: v1/pods test-app
+  featureGates:
+    nodeShell: false
+  proxy: null
