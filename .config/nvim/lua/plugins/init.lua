@@ -1,10 +1,9 @@
-local config = require("config.config").opts
 return {
-  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
-  { "neovim/nvim-lspconfig", lazy = false },
+  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true, lazy = false },
+  { "neovim/nvim-lspconfig", event = { "BufReadPre", "BufNewFile" } },
   {
     "utilyre/barbecue.nvim",
-    event = "VeryLazy",
+    event = { "LspAttach" },
     dependencies = {
       "neovim/nvim-lspconfig",
       "SmiteshP/nvim-navic",
@@ -12,14 +11,25 @@ return {
     },
     config = true,
   },
-  "nvim-lua/plenary.nvim",
-  { "b0o/schemastore.nvim", event = { "VeryLazy" } },
-  -- { "f-person/git-blame.nvim", event = "BufReadPost" },
-  { "tpope/vim-abolish", cmd = "Abolish", lazy = true, event = "VeryLazy" },
-  { "tpope/vim-surround", event = "BufReadPre" },
+  { "nvim-lua/plenary.nvim", lazy = true },
+  { "b0o/schemastore.nvim", ft = { "json", "yaml" } },
+  { "tpope/vim-abolish", cmd = "Abolish" },
+  { "tpope/vim-surround", keys = { "ys", "ds", "cs" } },
   {
     "stevearc/dressing.nvim",
-    event = "VeryLazy",
+    lazy = true,
+    init = function()
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.ui.select = function(...)
+        require("lazy").load { plugins = { "dressing.nvim" } }
+        return vim.ui.select(...)
+      end
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.ui.input = function(...)
+        require("lazy").load { plugins = { "dressing.nvim" } }
+        return vim.ui.input(...)
+      end
+    end,
     opts = {
       input = { relative = "editor" },
       select = {
@@ -35,15 +45,10 @@ return {
   },
   {
     "nvim-tree/nvim-web-devicons",
+    lazy = true,
     config = function() require("nvim-web-devicons").setup {} end,
   },
-  -- {
-  --   "andweeb/presence.nvim",
-  --   lazy = true,
-  --   event = "User FileOpened",
-  --   cond = function() return vim.fn.executable "discord" == 1 end,
-  -- },
-  { "editorconfig/editorconfig-vim" },
+  { "editorconfig/editorconfig-vim", event = { "BufReadPre", "BufNewFile" } },
   { import = "plugins.dbee.init" },
   {
     "m4xshen/smartcolumn.nvim",
@@ -66,46 +71,11 @@ return {
     },
   },
   {
-    "akinsho/nvim-bufferline.lua",
-    event = "VeryLazy",
-    enabled = false,
-    opts = {
-      options = {
-        mode = "tabs", -- tabs or buffers
-        numbers = "buffer_id",
-        diagnostics = "nvim_lsp",
-        always_show_bufferline = false,
-        separator_style = "slant" or "padded_slant",
-        show_tab_indicators = true,
-        show_buffer_close_icons = false,
-        show_close_icon = false,
-        color_icons = true,
-        enforce_regular_tabs = false,
-        custom_filter = function(buf_number, _)
-          local tab_num = 0
-          for _ in pairs(vim.api.nvim_list_tabpages()) do
-            tab_num = tab_num + 1
-          end
-
-          if tab_num > 1 then
-            if not not vim.api.nvim_buf_get_name(buf_number):find(vim.fn.getcwd(), 0, true) then return true end
-          else
-            return true
-          end
-        end,
-        sort_by = function(buffer_a, buffer_b)
-          local mod_a = ((vim.loop.fs_stat(buffer_a.path) or {}).mtime or {}).sec or 0
-          local mod_b = ((vim.loop.fs_stat(buffer_b.path) or {}).mtime or {}).sec or 0
-          return mod_a > mod_b
-        end,
-      },
-    },
-  },
-  {
     "numToStr/Comment.nvim",
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
     keys = { "gc", "gcc", "gbc" },
     config = function(_, _)
+      vim.g.skip_ts_context_commentstring_module = true
       local opts = {
         ignore = "^$",
         pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
@@ -123,7 +93,8 @@ return {
   },
   {
     "chentoast/marks.nvim",
-    event = { "VeryLazy" },
+    keys = { "m", "'", "`", "dm" },
+    event = { "BufReadPost" },
     config = function()
       local marks = require "marks"
       marks.setup {
@@ -147,7 +118,7 @@ return {
   },
   {
     "jinh0/eyeliner.nvim",
-    event = "VeryLazy",
+    keys = { "f", "F", "t", "T" },
     opts = {
       highlight_on_key = true, -- show highlights only after keypress
       dim = true, -- dim all other characters if set to true (recommended!)
@@ -155,7 +126,7 @@ return {
   },
   {
     "folke/flash.nvim",
-    event = "VeryLazy",
+    keys = { "s", "S", "r", "R" },
     opts = {
       modes = {
         char = {
@@ -235,7 +206,7 @@ return {
   },
   {
     "windwp/windline.nvim",
-    event = "VeryLazy",
+    event = "UIEnter",
     config = function() require "wlsample.airline" end,
   },
   {

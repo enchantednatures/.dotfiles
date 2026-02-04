@@ -1,7 +1,64 @@
--- local indent = 2
+-- ============================================================================
+-- UI & Display
+-- ============================================================================
+vim.opt.termguicolors = true -- Enable true colors
+vim.opt.signcolumn = "yes:1" -- Always show sign column
+vim.opt.guicursor = "" -- Disable cursor styling
+vim.opt.nu = true -- Show line numbers
+vim.opt.relativenumber = true -- Relative line numbers
+vim.opt.scrolloff = 8 -- Keep 8 lines above/below cursor
+vim.opt.laststatus = 3 -- Global statusline
+vim.opt.splitkeep = "screen" -- Prevent splits from jumping
+--vim.opt.colorcolumn = "80" -- Column guide at 80 chars
 
-vim.lsp.log.set_level "warn"
-vim.opt.swapfile = false
+-- ============================================================================
+-- Indentation & Formatting
+-- ============================================================================
+vim.opt.tabstop = 4 -- Tab width
+vim.opt.softtabstop = 4 -- Spaces for tab in insert mode
+vim.opt.shiftwidth = 4 -- Indentation width
+vim.opt.expandtab = true -- Use spaces instead of tabs
+vim.opt.smartindent = true -- Smart auto-indenting
+vim.opt.wrap = false -- No line wrapping
+vim.opt.shiftround = true -- Round indent to shiftwidth
+
+-- ============================================================================
+-- Search & Replace
+-- ============================================================================
+vim.opt.hlsearch = false -- Don't highlight search results
+vim.opt.incsearch = true -- Incremental search
+vim.opt.ignorecase = true -- Ignore case in search
+vim.opt.smartcase = true -- Override ignorecase if search has uppercase
+
+-- ============================================================================
+-- Files & Backups
+-- ============================================================================
+vim.opt.swapfile = false -- Disable swap files
+vim.opt.backup = false -- Disable backups
+vim.opt.undofile = true -- Persistent undo
+vim.opt.undodir = vim.fn.stdpath "data" .. "/undodir" -- Undo file directory
+vim.opt.autoread = true -- Auto-reload changed files
+vim.opt.autowrite = true -- Auto-save before commands
+
+-- ============================================================================
+-- Completion & Popup
+-- ============================================================================
+vim.o.completeopt = "menuone,noinsert,noselect"
+vim.opt.pumblend = 7 -- Popup window transparency
+vim.opt.pumheight = 20 -- Max items in popup
+vim.opt.wildoptions = "pum" -- Command-line completion menu
+
+-- ============================================================================
+-- Editor Behavior
+-- ============================================================================
+vim.opt.clipboard = "unnamedplus" -- Use system clipboard
+vim.opt.updatetime = 100 -- Faster completion
+vim.opt.shortmess = vim.opt.shortmess + "c" -- Don't show completion messages
+vim.opt.isfname:append "@-@" -- Include @ in filenames
+
+-- ============================================================================
+-- Diff Options
+-- ============================================================================
 vim.opt.diffopt = {
   "internal",
   "filler",
@@ -10,106 +67,5 @@ vim.opt.diffopt = {
   "algorithm:histogram",
   "linematch:200",
   "indent-heuristic",
-  "iwhite", -- I toggle this one, it doesn't fit all cases.
+  "iwhite", -- Toggle this for whitespace-insensitive diffs
 }
-local opt = vim.opt
-opt.signcolumn = "yes:1" -- Always show sign column
-opt.termguicolors = true -- Enable true colors
-opt.ignorecase = true -- Ignore case in search
-opt.swapfile = false -- Disable swap files
-
--- vim.o.formatoptions = "jcroqlnt"
--- vim.o.shortmess = "filnxtToOFWIcC"
--- vim.opt.breakindent = true
--- vim.opt.cmdheight = 1
--- vim.opt.clipboard = "unnamedplus" -- Access system clipboard
--- vim.opt.completeopt = "menuone,noselect"
--- vim.opt.conceallevel = 3
--- vim.opt.confirm = true
--- vim.opt.expandtab = true
--- vim.opt.hidden = true
--- vim.opt.hlsearch = false
--- vim.opt.ignorecase = true
--- vim.opt.inccommand = "nosplit"
--- vim.opt.joinspaces = false
--- vim.opt.laststatus = 0
--- vim.opt.list = true
--- vim.opt.mouse = "a"
--- vim.opt.number = true
--- vim.opt.pumblend = 10
--- vim.opt.pumheight = 10
--- vim.opt.relativenumber = true
--- vim.opt.scrolloff = 8
--- vim.opt.scrollback = 100000
--- vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
--- vim.opt.shiftround = true
--- vim.opt.shiftwidth = indent
--- vim.opt.showmode = false
--- vim.opt.sidescrolloff = 8
--- vim.opt.signcolumn = "yes"
--- vim.opt.smartcase = true
--- vim.opt.smartindent = true
--- vim.opt.splitbelow = true
--- vim.opt.splitkeep = "screen" -- Neovim 0.9
--- vim.opt.splitright = true
--- vim.opt.tabstop = indent
--- vim.opt.termguicolors = true
--- vim.opt.timeoutlen = 300
--- vim.opt.undofile = true
--- vim.opt.updatetime = 200
--- vim.opt.wildmode = "longest:full,full"
-
-vim.opt.guicursor = ""
-
-vim.opt.nu = true
-vim.opt.relativenumber = true
-
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-
-vim.opt.smartindent = true
--- vim.opt.cursorline = true
-vim.opt.wrap = false
-vim.opt.shiftround = true
-vim.opt.swapfile = false
-vim.opt.autoread = true
-vim.opt.autowrite = true
-vim.opt.backup = false
-vim.opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
-vim.opt.undofile = true
-
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
-
-vim.opt.termguicolors = true
-
-vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
-vim.opt.isfname:append "@-@"
-
-vim.o.completeopt = "menuone,noinsert,noselect"
-vim.opt.shortmess = vim.opt.shortmess + "c"
-
-vim.opt.updatetime = 50
-
---vim.opt.colorcolumn = "80"
-
-vim.opt.clipboard = "unnamedplus"
-
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-vim.opt.updatetime = 100
-vim.g.skip_ts_context_commentstring_module = true
-
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-
--- from avante.nvim
--- views can only be fully collapsed with the global statusline
-vim.opt.laststatus = 3
--- Default splitting will cause your main splits to jump when opening an edgebar.
--- To prevent this, set `splitkeep` to either `screen` or `topline`.
-vim.opt.splitkeep = "screen"
-vim.opt.wildoptions = "pum"
-vim.opt.pumblend = 7 -- Make popup window translucent
-vim.opt.pumheight = 20

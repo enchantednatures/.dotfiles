@@ -1,8 +1,7 @@
 return {
   {
     "folke/which-key.nvim",
-    lazy = true,
-    event = { "VeryLazy", "BufReadPost" },
+    event = "VeryLazy",
     keys = {
       {
         "<leader>?",

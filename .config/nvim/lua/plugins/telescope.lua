@@ -51,7 +51,7 @@ return {
       },
       {
         "<leader>tf",
-        require("utils").find_files,
+        function() require("utils").find_files() end,
         desc = "Find Files",
       },
       -- {
@@ -351,7 +351,8 @@ return {
     opts = { kcat_path = "/opt/homebrew/bin/kcat" },
   },
   {
-    "enchantednatures/telescope-cnpg.nvim",
+    -- // todo: get this from git
+    dir = "~/Developer/telescope-cnpg.nvim",
     keys = {
       {
         "<leader>tm",

@@ -1,29 +1,3 @@
-vim.filetype.add {
-  extension = {
-    gotmpl = "gotmpl",
-  },
-  pattern = {
-    [".*/templates/.*%.tpl"] = "helm",
-    [".*/templates/.*%.ya?ml"] = "helm",
-    ["helmfile.*%.ya?ml"] = "helm",
-  },
-}
-local swap_next, swap_prev = (function()
-  local swap_objects = {
-    p = "@parameter.inner",
-    f = "@function.outer",
-    c = "@class.outer",
-  }
-
-  local n, p = {}, {}
-  for key, obj in pairs(swap_objects) do
-    n[string.format("<leader>cx%s", key)] = obj
-    p[string.format("<leader>cX%s", key)] = obj
-  end
-
-  return n, p
-end)()
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -314,8 +288,16 @@ return {
         },
         swap = {
           enable = true,
-          swap_next = swap_next,
-          swap_previous = swap_prev,
+          swap_next = {
+            ["<leader>cxp"] = "@parameter.inner",
+            ["<leader>cxf"] = "@function.outer",
+            ["<leader>cxc"] = "@class.outer",
+          },
+          swap_previous = {
+            ["<leader>cXp"] = "@parameter.inner",
+            ["<leader>cXf"] = "@function.outer",
+            ["<leader>cXc"] = "@class.outer",
+          },
         },
       },
       matchup = {
@@ -338,13 +320,19 @@ return {
         end,
       })
 
-      -- Add filetype detection for common C++ extensions
+      -- Add filetype detection
       vim.filetype.add {
         extension = {
           hpp = "cpp",
           cpp = "cpp",
           h = "cpp",
           cc = "cpp",
+          gotmpl = "gotmpl",
+        },
+        pattern = {
+          [".*/templates/.*%.tpl"] = "helm",
+          [".*/templates/.*%.ya?ml"] = "helm",
+          ["helmfile.*%.ya?ml"] = "helm",
         },
       }
     end,

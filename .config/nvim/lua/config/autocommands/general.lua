@@ -14,30 +14,7 @@ vim.on_key(toggle_hlsearch, ns)
 
 vim.api.nvim_create_autocmd("FocusGained", { command = "checktime" })
 
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = { "sql", "mysql", "plsql" },
---   callback = function()
---     local cmp = require("cmp")
---     cmp.setup.buffer({ sources = { { name = "vim-dadbod-completion" } } })
---   end,
---   group = augroups.attachDadbodCompletion
--- })
-
--- vim.api.nvim_create_autocmd({ "BufRead", "BufWinEnter", "BufNewFile" }, {
---   group = augroups.fileOpened,
---   once = true,
---   callback = function(args)
---     local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
---     if not (vim.fn.expand "%" == "" or buftype == "nofile") then
---       vim.cmd "do User FileOpened"
---       -- todo:
---       -- require("user.lsp").setup()
---       vim.cmd "LspStart"
---     end
---   end,
--- })
-
--- go to last loc when opening a buffer
+-- Go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroups.openToLastLoc,
   callback = function()

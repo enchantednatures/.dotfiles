@@ -32,26 +32,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     require("config.lsp_keymaps").on_attach(client, bufnr)
     lsp_highlight(client, bufnr)
 
-    -- local lspconfig_defaults = require("lspconfig").util.default_config
-    -- lspconfig_defaults.capabilities =
-    --   vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-    -- -- Handle formatting through a single autocommand
     if client.server_capabilities.documentFormattingProvider then
       vim.api.nvim_clear_autocmds {
         group = augroups.autoformat,
         buffer = bufnr,
       }
-      -- vim.api.nvim_create_autocmd("BufWritePre", {
-      --   group = augroups.autoformat,
-      --   buffer = bufnr, -- Make this buffer-local
-      --   callback = function()
-      --     vim.lsp.buf.format {
-      --       timeout_ms = 500,
-      --       bufnr = bufnr,
-      --     }
-      --   end,
-      -- })
     end
   end,
 })

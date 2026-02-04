@@ -32,19 +32,31 @@ end
 
 return {
   "nvim-tree/nvim-tree.lua",
-  lazy = true,
-  cmd = { "NvimTreeToggle" },
+  cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile", "NvimTreeClose" },
   keys = {
     { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
-    { "<esc>", "<cmd>NvimTreeClose<cr>", desc = "Explorer" },
-    { "ga", get_add, "Toggle Git Staged" },
-    { "gi", toggle_gitignore, "Toggle Git Ignore" },
-    -- { "t",         open_tab_silent,           "open tab silent" }
   },
-  opts = {
-    disable_netrw = false,
-    hijack_netrw = true,
-    respect_buf_cwd = true,
+  config = function()
+    local function on_attach(bufnr)
+      local api = require "nvim-tree.api"
+      local function opts(desc)
+        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+      end
+
+      -- Default mappings
+      api.config.mappings.default_on_attach(bufnr)
+
+      -- Custom mappings
+      vim.keymap.set("n", "<esc>", api.tree.close, opts "Close")
+      vim.keymap.set("n", "ga", get_add, opts "Toggle Git Staged")
+      vim.keymap.set("n", "gi", toggle_gitignore, opts "Toggle Git Ignore")
+    end
+
+    require("nvim-tree").setup {
+      on_attach = on_attach,
+      disable_netrw = false,
+      hijack_netrw = true,
+      respect_buf_cwd = true,
     git = {
       enable = true,
       timeout = 200, -- Reduced timeout for better performance
@@ -102,5 +114,6 @@ return {
         },
       },
     },
-  },
+    }
+  end,
 }

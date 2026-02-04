@@ -45,29 +45,31 @@ return {
       },
     },
     config = function()
-      require("neotest").setup {
-        adapters = {
-          require "neotest-python" {
-            dap = { justMyCode = false },
-            runner = "unittest",
-          },
-          require "neotest-plenary",
-          require "neotest-vim-test" {
-            ignore_file_types = { "python", "vim", "lua" },
-          },
-          require "rustaceanvim.neotest" {
-            args = { "--archive-format", "auto" },
-          },
-          require "neotest-golang" {},
-          require "neotest-dotnet" {
-            dap = { adapter_name = "coreclr", enabled = true },
-            discovery_root = "solution",
-            discovery_recursive = true,
-            output_live = true,
-          },
+      local adapters = {
+        require("neotest-python") {
+          dap = { justMyCode = false },
+          runner = "unittest",
         },
+        require("neotest-plenary"),
+        require("neotest-vim-test") {
+          ignore_file_types = { "python", "vim", "lua" },
+        },
+        require("rustaceanvim.neotest") {
+          args = { "--archive-format", "auto" },
+        },
+          require "neotest-golang" {},
+        require("neotest-dotnet") {
+          dap = { adapter_name = "coreclr", enabled = true },
+          discovery_root = "solution",
+          discovery_recursive = true,
+          output_live = true,
+        },
+      }
+      
+      require("neotest").setup {
+        adapters = adapters,
         consumers = {
-          overseer = require "neotest.consumers.overseer",
+          overseer = require("neotest.consumers.overseer"),
         },
         overseer = {
           enabled = true,

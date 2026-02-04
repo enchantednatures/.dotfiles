@@ -1,7 +1,7 @@
 return {
   {
     "mason-org/mason.nvim",
-    event = { "BufReadPre", "BufNewFile", "VeryLazy" },
+    event = { "BufReadPre", "BufNewFile" },
     cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonLog", "MasonUpdate" },
     config = function()
       require("mason").setup {

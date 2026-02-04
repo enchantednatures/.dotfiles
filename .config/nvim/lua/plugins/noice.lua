@@ -1,7 +1,7 @@
 return {
   "folke/noice.nvim",
   dependencies = {
-    "MunifTanjim/nui.nvim",
+    { "MunifTanjim/nui.nvim", lazy = true },
     -- {
     --   "rcarriga/nvim-notify",
     --   lazy = true,
@@ -17,7 +17,7 @@ return {
     --   end,
     -- },
   },
-  event = "VeryLazy",
+  event = "UIEnter",
   -- lazy = true,
   config = true,
   opts = {

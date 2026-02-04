@@ -2,8 +2,7 @@ return {
   {
     "echasnovski/mini.nvim",
     version = "*",
-    lazy = true,
-    event = { "BufReadPre", "BufNewFile", "VeryLazy", "InsertEnter" },
+    event = { "BufReadPre", "BufNewFile" },
     config = function() require("mini.cursorword").setup() end,
   },
   {

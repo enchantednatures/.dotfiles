@@ -28,7 +28,7 @@ require("lazy").setup {
         "gzip",
         "matchit",
         "matchparen",
-        -- "netrwPlugin",
+        "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
@@ -49,4 +49,3 @@ require("lazy").setup {
   },
 }
 vim.keymap.set("n", "<leader>zz", "<cmd>:Lazy<cr>", { desc = "Manage Plugins" })
-vim.cmd "colorscheme gruvbox"

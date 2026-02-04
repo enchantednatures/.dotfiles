@@ -13,7 +13,7 @@ return {
       timeout = 250,
     },
     status = {
-      recent_commit_count = 10,
+      recent_commit_count = 50,
     },
   },
   keys = {
