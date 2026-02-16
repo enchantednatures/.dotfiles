@@ -1,5 +1,5 @@
 return {
-  dir = "~/Developer/nvim-dbee",
+  "enchantednatures/nvim-dbee",
   cmd = { "Dbee" },
   keys = {
     { "<leader>DB", "<cmd>Dbee<cr>", desc = "DBee" },
