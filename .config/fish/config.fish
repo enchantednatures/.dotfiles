@@ -64,3 +64,6 @@ if status is-interactive
     direnv hook fish | source
     zoxide init fish | source
 end
+
+# opencode
+fish_add_path /home/hcasten/.opencode/bin

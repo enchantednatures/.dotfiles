@@ -7,6 +7,7 @@ keybinds clear-defaults=true {
         bind "f" { SwitchToMode "scroll"; }
         bind "h" { SwitchToMode "move"; }
         bind "n" { SwitchToMode "resize"; }
+        bind "m" { SwitchToMode "move"; }
         bind "p" { SwitchToMode "pane"; }
         bind "s" { SwitchToMode "search"; }
         bind "t" { SwitchToMode "tab"; }
@@ -14,7 +15,47 @@ keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
         bind "Ctrl p" { ToggleFloatingPanes; SwitchToMode "locked"; }
+        bind "Alt c" {
+            Run "opencode run /commit" {
+                floating true
+                close_on_exit true
+            }
+        }
+        bind "Alt f" {
+            LaunchOrFocusPlugin "filepicker" {
+                floating true
+                close_on_selection true // Closes and opens the file in a new pane
+            }
+        }
+        bind "Alt g" {
+            Run "lazygit" {
+                floating true
+                close_on_exit true
+            }
+        }
+
+        bind "Alt d" {
+            Run "lazydocker" {
+                floating true
+                close_on_exit true
+            }
+        }
+
+        bind "Alt k" {
+            Run "k9s" {
+                floating true
+                close_on_exit true
+            }
+        }
+
+        bind "Alt o" {
+            Run "opencode" {
+                floating true
+                close_on_exit false
+            }
+        }
     }
+
     pane {
         bind "left" { MoveFocus "left"; }
         bind "down" { MoveFocus "down"; }

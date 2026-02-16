@@ -351,7 +351,7 @@ return {
     opts = { kcat_path = "/opt/homebrew/bin/kcat" },
   },
   {
-    dir = "~/Developer/telescope-cnpg.nvim",
+    "enchantednatures/telescope-cnpg.nvim",
     keys = {
       {
         "<leader>tm",
