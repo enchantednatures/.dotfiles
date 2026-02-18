@@ -50,6 +50,7 @@ function load_api_keys
     set -gx OPEN_WEBUI_API_KEY (atuin kv get open_webui)
     set -gx GROQ_API_KEY (atuin kv get groq)
     set -gx OPENROUTER_API_KEY (atuin kv get openrouter)
+    set -gx GITHUB_PERSONAL_ACCESS_TOKEN (gh auth token)
 end
 
 if status is-interactive

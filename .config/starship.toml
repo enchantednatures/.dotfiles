@@ -35,7 +35,7 @@ $cmd_duration\
 
 add_newline = false
 
-command_timeout = 100  
+command_timeout = 500
 
 # You can also replace your username with a neat symbol like   or disable this
 # and use the os module below

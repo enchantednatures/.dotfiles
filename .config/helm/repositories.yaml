@@ -28,3 +28,12 @@ repositories:
   password: ""
   url: https://charts.goauthentik.io
   username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: flagger
+  pass_credentials_all: false
+  password: ""
+  url: https://flagger.app
+  username: ""

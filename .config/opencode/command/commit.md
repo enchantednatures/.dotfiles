@@ -1,6 +1,6 @@
 ---
 description: Generate a commit message
-model: opencode/glm-4.7-
+model: opencode/kimi-k2.5
 ---
 
 Commit and push
