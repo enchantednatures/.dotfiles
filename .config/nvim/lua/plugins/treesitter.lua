@@ -238,7 +238,7 @@ return {
         -- "toml",
         -- "typescript",
         -- "vim",
-        -- "yaml",
+        "yaml",
       },
       highlight = { enable = true },
       indent = { enable = true, disable = { "python" } },

@@ -37,15 +37,15 @@ return {
     strategies = {
       chat = {
         adapter = "opencode",
-        model = "gpt-5-mini",
+        model = "opencode/kimi-k2.5",
       },
       inline = {
         adapter = "opencode",
-        model = "gpt-5-mini",
+        model = "opencode/kimi-k2.5",
       },
       cmd = {
         adapter = "opencode",
-        model = "gpt-5-mini",
+        model = "opencode/kimi-k2.5",
       },
     },
   },
