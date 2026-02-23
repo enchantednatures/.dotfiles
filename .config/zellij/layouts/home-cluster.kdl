@@ -31,15 +31,16 @@ layout {
         }
     }
 
-    tab name="nvim" focus=true hide_floating_panes=true {
-        pane { 
-            command "nvim"
-        }
-    }
 
     tab name="opencode" focus=false hide_floating_panes=true {
         pane { 
             command "opencode"
+        }
+    }
+
+    tab name="nvim" focus=true hide_floating_panes=true {
+        pane { 
+            command "nvim"
         }
     }
 
@@ -50,10 +51,10 @@ layout {
     }
 
 
-    tab name="seko" hide_floating_panes=true  {
-        seko
-        floating_panes {
-           seko 
-        }
-    }
+    // tab name="seko" hide_floating_panes=true  {
+    //     seko
+    //     floating_panes {
+    //        seko 
+    //     }
+    // }
 }

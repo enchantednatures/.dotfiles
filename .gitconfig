@@ -35,6 +35,7 @@
 	ss = "!f() { git stash show stash^{/$*} -p; }; f"
 	sa = "!f() { git stash apply stash^{/$*}; }; f"
 	sl = stash list
+	wip = !git add -A && git commit -m "wip"
     dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
 [help]
 	autocorrect = 1
