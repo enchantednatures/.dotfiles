@@ -1,13 +1,12 @@
 local function is_remote()
   -- return vim.fn.exists("$SSH_CONNECTION") == 1 or vim.fn.exists("$SSH_CLIENT") == 1 or vim.fn.exists("$SSH_TTY") == 1
-  return true
+  return false
 end
 
 return {
   "ojroques/nvim-osc52",
-
   event = "VeryLazy",
-  enabled = is_remote() or vim.fn.empty(vim.fn.getenv "DISPLAY") == 1 or vim.fn.exists "$ZELLIJ_SESSION_NAME" == 1,
+  enabled = is_remote(), --or vim.fn.empty(vim.fn.getenv "DISPLAY") == 1 or vim.fn.exists "$ZELLIJ_SESSION_NAME" == 1,
   config = function()
     local osc52 = require "osc52"
 

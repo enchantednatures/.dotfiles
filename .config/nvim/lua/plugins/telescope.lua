@@ -357,7 +357,7 @@ return {
   --       Ensure ~/Developer/telescope-cnpg.nvim exists or remove if not needed.
   -- ============================================================================
   {
-    dir = "~/Developer/telescope-cnpg.nvim",
+    "enchantednatures/telescope-cnpg.nvim",
     keys = {
       {
         "<leader>tm",
