@@ -1,3 +1,9 @@
+-- ============================================================================
+-- Module: plugins/telescope.lua
+-- Description: Fuzzy finder with 10+ extensions
+-- Dependencies: plenary.nvim (core), plus various extensions
+-- ============================================================================
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -20,7 +26,6 @@ return {
           },
         },
       },
-      -- "cljoly/telescope-repo.nvim",
       "debugloop/telescope-undo.nvim",
       "molecule-man/telescope-menufacture",
       "kkharji/sqlite.lua",
@@ -54,11 +59,6 @@ return {
         function() require("utils").find_files() end,
         desc = "Find Files",
       },
-      -- {
-      --   "<leader>ff",
-      --   function() require("telescope.builtin").find_files() end,
-      --   desc = "Find Files",
-      -- },
       {
         "<leader><tab>",
         "<Cmd>lua require('telescope.builtin').commands()<CR>",
@@ -350,8 +350,13 @@ return {
     },
     opts = { kcat_path = "/opt/homebrew/bin/kcat" },
   },
+  -- ============================================================================
+  -- Local Development Plugin: telescope-cnpg.nvim
+  -- Description: Custom telescope extension for CNPG (CloudNativePG) resources
+  -- Note: This references a local directory for active development.
+  --       Ensure ~/Developer/telescope-cnpg.nvim exists or remove if not needed.
+  -- ============================================================================
   {
-    -- // todo: get this from git
     dir = "~/Developer/telescope-cnpg.nvim",
     keys = {
       {

@@ -1,3 +1,9 @@
+-- ============================================================================
+-- Module: lazy.lua
+-- Description: Plugin manager setup (lazy.nvim)
+-- Dependencies: None (bootstraps itself)
+-- ============================================================================
+
 --- Install lazy.nvim
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

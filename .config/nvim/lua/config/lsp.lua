@@ -1,3 +1,9 @@
+-- ============================================================================
+-- Module: lsp.lua
+-- Description: Core LSP configuration (server enablement, inlay hints)
+-- Dependencies: None (uses built-in LSP)
+-- ============================================================================
+
 vim.lsp.log.set_level "ERROR"
 
 vim.lsp.config("*", {

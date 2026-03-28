@@ -1,7 +1,6 @@
 require "config.autocommands.general"
 require "config.autocommands.lsp"
 require "config.autocommands.worktree"
--- require "config.autocommands.cargo"
 
 vim.api.nvim_create_user_command("OverseerRestartLast", function()
   local overseer = require "overseer"

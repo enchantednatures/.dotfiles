@@ -1,3 +1,9 @@
+-- ============================================================================
+-- Module: plugins/test.lua
+-- Description: Testing framework (neotest) + task runner (overseer)
+-- Dependencies: neotest, overseer.nvim
+-- ============================================================================
+
 return {
   {
     "nvim-neotest/neotest",

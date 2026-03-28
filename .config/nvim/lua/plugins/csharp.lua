@@ -2,7 +2,7 @@ return {
   {
     "seblyng/roslyn.nvim",
     dependencies = {
-      "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
     },
     ft = { "cs", "csproj", "vb", "fsproj" },
     keys = {

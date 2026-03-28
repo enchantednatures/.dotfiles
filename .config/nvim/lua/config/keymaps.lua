@@ -1,3 +1,9 @@
+-- ============================================================================
+-- Module: keymaps.lua
+-- Description: Core keymaps (non-plugin specific)
+-- Dependencies: None
+-- ============================================================================
+
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
 

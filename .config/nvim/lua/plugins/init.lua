@@ -1,3 +1,8 @@
+-- ============================================================================
+-- Module: plugins/init.lua
+-- Description: Core plugins that don't need their own file
+-- ============================================================================
+
 return {
   { "ellisonleao/gruvbox.nvim", priority = 1000, config = true, lazy = false },
   { "neovim/nvim-lspconfig", event = { "BufReadPre", "BufNewFile" } },
@@ -59,11 +64,6 @@ return {
       disabled_filetypes = { "help", "text", "markdown", "alpha", "Telescope" },
     },
   },
-  -- {
-  --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-  --   event = "VeryLazy",
-  --   config = function() require("lsp_lines").setup() end,
-  -- },
   {
     "windwp/nvim-spectre",
     keys = {

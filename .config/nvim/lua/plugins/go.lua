@@ -7,7 +7,7 @@ return {
       -- "neovim/nvim-lspconfig",
       "nvim-treesitter/nvim-treesitter",
       "nvim-neotest/neotest",
-      "nvim-neotest/neotest-go",
+      -- NOTE: neotest-go removed - using neotest-golang from test.lua instead
     },
     build = ':lua require("go.install").update_all_sync()',
     config = function()

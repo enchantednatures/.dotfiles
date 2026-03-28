@@ -1,3 +1,9 @@
+-- ============================================================================
+-- Module: plugins/lsp.lua
+-- Description: LSP ecosystem - mason, lspconfig, none-ls, conform
+-- Dependencies: mason.nvim, nvim-lspconfig
+-- ============================================================================
+
 return {
   {
     "mason-org/mason.nvim",
@@ -16,8 +22,8 @@ return {
     end,
   },
   {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = { "mason-org/mason.nvim" },
     config = function()
       local opts = {
         ensure_installed = {
@@ -35,7 +41,6 @@ return {
           "lua_ls",
           "roslyn",
           "ruff",
-          -- "spectral-language-server",
           "terraform-ls",
           "ts_ls",
           "typescript-language-server",
@@ -52,6 +57,34 @@ return {
       require("mason-lspconfig").setup(opts)
     end,
   },
+  -- ============================================================================
+  -- None-ls (formerly null-ls) - Audit Note
+  -- 
+  -- Purpose: Provides code actions and diagnostics not available via LSP
+  -- 
+  -- Current Usage:
+  --   Code Actions:
+  --     - gomodifytags: Modify Go struct tags (add/remove/edit json/db tags)
+  --     - impl: Generate Go interface implementations
+  --   
+  --   Diagnostics (Linting):
+  --     - cmake_lint: CMakeLists.txt linting
+  --     - hadolint: Dockerfile linting  
+  --     - cppcheck: C/C++ static analysis
+  --     - golangci_lint: Go comprehensive linting
+  --     - terraform_validate: Terraform validation (using tofu)
+  --     - opentofu_validate: OpenTofu validation
+  --     - protolint: Protocol Buffers linting
+  --
+  -- Overlap with conform.nvim:
+  --   - Formatting: conform.nvim handles all formatting (none-ls not used)
+  --   - This config only uses none-ls for code actions and diagnostics
+  --
+  -- To Remove None-ls:
+  --   1. Find alternatives for Go code actions (gomodifytags, impl)
+  --   2. Ensure LSPs provide equivalent diagnostics, OR
+  --   3. Use standalone linters with custom autocmds
+  -- ============================================================================
   {
     "nvimtools/none-ls.nvim",
     lazy = true,
@@ -81,12 +114,10 @@ return {
           "gomodifytags",
           "google_java_format",
           "impl",
-          -- "mypy",
           "prettier",
           "prettierd",
           "protolint",
           "shfmt",
-          -- "spectral-language-server",
           "sqlfluff",
           "stylua",
         },
@@ -95,17 +126,11 @@ return {
       nls.setup {
         sources = {
           -- Code actions
-          -- nls.builtins.code_actions.gitsigns.with {
-          --   config = {
-          --     filter_actions = function(title) return title:lower():match "blame" == nil end,
-          --   },
-          -- },
           nls.builtins.code_actions.gomodifytags,
           nls.builtins.code_actions.impl,
 
           -- Diagnostics
           nls.builtins.diagnostics.cmake_lint,
-          -- nls.builtins.diagnostics.mypy,
           nls.builtins.diagnostics.hadolint,
           nls.builtins.diagnostics.cppcheck,
           nls.builtins.diagnostics.golangci_lint,
