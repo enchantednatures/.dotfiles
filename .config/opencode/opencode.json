@@ -8,6 +8,10 @@
     "*": "allow",
     "external_directory": {
       "/tmp/*": "allow"
+    },
+    "read": {
+      "~/Developer/**/*": "allow",
+      "~/source/**/*": "allow"
     }
   },
   "mcp": {
