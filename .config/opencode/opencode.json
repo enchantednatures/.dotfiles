@@ -7,9 +7,7 @@
   "permission": {
     "*": "allow",
     "external_directory": {
-      "/tmp/*": "allow",
-      "~/Developer/**/*": "read",
-      "~/source/**/*": "read"
+      "/tmp/*": "allow"
     }
   },
   "mcp": {
