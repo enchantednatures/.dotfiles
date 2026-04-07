@@ -1,6 +1,9 @@
 return {
   "saghen/blink.cmp",
   -- ft = { "lua", "python", "go", "rust", "javascript", "typescript", "html", "css" },
+  dependencies = {
+    "zbirenbaum/copilot.lua",
+  },
   version = "1.*",
   lazy = true,
   event = "InsertEnter",

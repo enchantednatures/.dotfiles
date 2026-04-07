@@ -1,6 +1,6 @@
 ---
 description: Generate a comprehensive PR description from specification and implementation
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Generate a pull request description

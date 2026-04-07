@@ -1,6 +1,6 @@
 ---
 description: View and manage AI context - current unit, phase, decisions, constraints, and progress
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 View or switch AI context

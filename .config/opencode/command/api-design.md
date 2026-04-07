@@ -1,6 +1,6 @@
 ---
 description: Design REST, GraphQL, or gRPC APIs following best practices
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Design an API

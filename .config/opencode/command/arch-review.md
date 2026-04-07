@@ -1,6 +1,6 @@
 ---
 description: Review system architecture against requirements and best practices
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Perform an architecture review

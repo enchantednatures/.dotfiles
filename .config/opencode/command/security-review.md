@@ -1,6 +1,6 @@
 ---
 description: Conduct security-focused code review to identify vulnerabilities
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Perform a security review

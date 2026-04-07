@@ -14,6 +14,9 @@
       "~/source/**/*": "allow"
     }
   },
+  "keybinds": {
+    "command_list": "<leader>p"
+  },
   "mcp": {
     "kubernetes": {
       "type": "local",
@@ -39,143 +42,33 @@
     "build": {
       "mode": "primary",
       "temperature": 0.3,
-      "model": "opencode/kimi-k2.5",
-      "prompt": "{file:./agents/build.md}",
+      "model": "opencode-go/kimi-k2.5",
       "permission": {
-        "edit": "ask",
+        "edit": "allow",
         "bash": {
           "*": "ask",
           "git status": "allow",
           "git log*": "allow",
           "git diff*": "allow",
-          "ls*": "allow",
-          "pwd": "allow"
-        },
-        "webfetch": "ask"
-      },
-      "color": "primary"
-    },
-    "plan": {
-      "mode": "primary",
-      "temperature": 0.1,
-      "model": "opencode/kimi-k2.5",
-      "prompt": "{file:./agents/plan.md}",
-      "permission": {
-        "edit": "deny",
-        "bash": {
-          "*": "ask",
-          "git status": "allow",
-          "git log*": "allow",
-          "git diff*": "allow",
+          "git show*": "allow",
+          "git rev-parse*": "allow",
           "ls*": "allow",
           "pwd": "allow",
           "grep*": "allow",
-          "find*": "allow"
+          "rg*": "allow",
+          "find*": "allow",
+          "fd*": "allow",
+          "cat*": "allow",
+          "head*": "allow",
+          "tail*": "allow",
+          "kubectl get*": "allow",
+          "kubectl describe*": "allow",
+          "kubectl logs*": "allow",
+          "kubectl top*": "allow"
         },
         "webfetch": "allow"
       },
-      "color": "secondary"
-    },
-    "security": {
-      "mode": "subagent",
-      "description": "Security specialist - Identifies vulnerabilities and validates security controls",
-      "temperature": 0.1,
-      "permission": {
-        "edit": "deny",
-        "bash": "deny",
-        "webfetch": "allow"
-      },
-      "color": "error"
-    },
-    "performance": {
-      "mode": "subagent",
-      "description": "Performance specialist - Identifies bottlenecks and suggests optimizations",
-      "temperature": 0.2,
-      "permission": {
-        "edit": "deny",
-        "bash": "deny",
-        "webfetch": "allow"
-      },
-      "color": "warning"
-    },
-    "architecture": {
-      "mode": "subagent",
-      "description": "Architecture specialist - Reviews system design against requirements and best practices",
-      "temperature": 0.2,
-      "permission": {
-        "edit": "deny",
-        "bash": "deny",
-        "webfetch": "allow"
-      },
-      "color": "accent"
-    },
-    "api-design": {
-      "mode": "subagent",
-      "description": "API design specialist - Designs REST, GraphQL, and gRPC APIs following best practices",
-      "temperature": 0.3,
-      "permission": {
-        "edit": "ask",
-        "bash": "deny",
-        "webfetch": "allow"
-      },
-      "color": "info"
-    },
-    "data-model": {
-      "mode": "subagent",
-      "description": "Data modeling specialist - Designs database schemas and entity relationships",
-      "temperature": 0.2,
-      "permission": {
-        "edit": "ask",
-        "bash": "deny",
-        "webfetch": "allow"
-      },
-      "color": "success"
-    },
-    "refactor": {
-      "mode": "subagent",
-      "description": "Refactoring specialist - Safely improves code structure while preserving behavior",
-      "temperature": 0.2,
-      "permission": {
-        "edit": "ask",
-        "bash": {
-          "*": "ask",
-          "git status": "allow",
-          "git log*": "allow",
-          "git diff*": "allow"
-        }
-      },
-      "color": "accent"
-    },
-    "test": {
-      "mode": "subagent",
-      "description": "Test specialist - Designs and implements comprehensive test strategies",
-      "temperature": 0.2,
-      "permission": {
-        "edit": "ask",
-        "bash": {
-          "*": "ask",
-          "npm test": "allow",
-          "yarn test": "allow",
-          "pnpm test": "allow",
-          "cargo test": "allow",
-          "go test": "allow",
-          "pytest": "allow",
-          "jest": "allow",
-          "vitest": "allow"
-        }
-      },
-      "color": "success"
-    },
-    "docs": {
-      "mode": "subagent",
-      "description": "Documentation specialist - Creates and maintains clear, comprehensive documentation",
-      "temperature": 0.4,
-      "permission": {
-        "edit": "ask",
-        "bash": "deny",
-        "webfetch": "allow"
-      },
-      "color": "info"
+      "color": "primary"
     }
   }
 }

@@ -1,6 +1,6 @@
 ---
 description: Perform comprehensive code review of implementation
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Perform a code review

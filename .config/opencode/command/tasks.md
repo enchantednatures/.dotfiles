@@ -1,6 +1,6 @@
 ---
 description: Break down implementation plan into executable tasks with acceptance criteria
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Create a task list from implementation plan

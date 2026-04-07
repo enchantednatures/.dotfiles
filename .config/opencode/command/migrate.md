@@ -1,6 +1,6 @@
 ---
 description: Plan and execute safe database, code, or infrastructure migrations
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Plan a migration

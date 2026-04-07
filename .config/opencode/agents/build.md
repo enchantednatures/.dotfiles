@@ -2,7 +2,7 @@
 description: AI-DLC Build agent - Full development agent for implementing features using AI-DLC methodology
 mode: primary
 temperature: 0.3
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 permission:
   edit: ask
   bash:

@@ -2,7 +2,7 @@
 description: AI-DLC Plan agent - Analysis and planning agent that reviews code and creates plans without making changes
 mode: primary
 temperature: 0.1
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 permission:
   edit: deny
   bash:

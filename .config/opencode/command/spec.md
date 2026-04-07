@@ -1,6 +1,6 @@
 ---
 description: Start a new specification and PRD for a feature or project
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Create a comprehensive specification and PRD

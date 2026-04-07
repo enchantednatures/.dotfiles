@@ -1,6 +1,6 @@
 ---
 description: Design database schemas, entities, and relationships
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Design a data model

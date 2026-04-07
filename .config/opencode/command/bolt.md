@@ -1,6 +1,6 @@
 ---
 description: Plan and execute a Bolt - short, intense work cycle (hours/days) for rapid delivery
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Plan and execute a Bolt

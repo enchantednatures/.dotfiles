@@ -1,6 +1,6 @@
 ---
 description: Create an implementation plan from a completed specification
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Create an implementation plan

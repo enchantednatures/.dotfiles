@@ -1,6 +1,6 @@
 ---
 description: Facilitate a Mob Elaboration session for collaborative requirements validation and clarification
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Facilitate a Mob Elaboration session

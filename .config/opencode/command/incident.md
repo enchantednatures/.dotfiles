@@ -1,6 +1,6 @@
 ---
 description: Respond to production incidents systematically to minimize impact and restore service
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Respond to an incident

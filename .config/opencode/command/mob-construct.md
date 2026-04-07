@@ -1,6 +1,6 @@
 ---
 description: Facilitate a Mob Construction session for collaborative technical decision making and architecture validation
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 ---
 
 Facilitate a Mob Construction session
