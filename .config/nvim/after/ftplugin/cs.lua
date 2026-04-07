@@ -72,21 +72,6 @@ vim.keymap.set(
   vim.tbl_extend("force", opts, { desc = "Debug test under cursor" })
 )
 
--- Quick build commands
-vim.keymap.set(
-  "n",
-  "<leader>bb",
-  function() require("easy-dotnet").build_default_quickfix() end,
-  vim.tbl_extend("force", opts, { desc = "Build project" })
-)
-
-vim.keymap.set(
-  "n",
-  "<leader>br",
-  function() require("easy-dotnet").run_default() end,
-  vim.tbl_extend("force", opts, { desc = "Run project" })
-)
-
 vim.api.nvim_create_autocmd({ "InsertLeave", "LspAttach", "BufReadPre", "BufWritePost" }, {
   pattern = "*",
   callback = function()

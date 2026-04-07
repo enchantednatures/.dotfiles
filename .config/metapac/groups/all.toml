@@ -1,0 +1,17 @@
+arch = {
+  packages = [
+    "metapac",
+         {
+      name = "openssh",
+      hooks = {
+        after_sync = [
+          "sudo",
+          "systemctl",
+          "enable",
+          "--now",
+          "sshd",
+        ]
+      }
+    },
+  ]
+}

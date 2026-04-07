@@ -106,45 +106,6 @@ return {
     end,
   },
   {
-    "GustavEikaas/easy-dotnet.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-    ft = { "cs", "csproj", "sln", "fsproj" },
-    keys = {
-      { "<leader>Db", function() require("easy-dotnet").build_default_quickfix() end, desc = "Build Project" },
-      { "<leader>Dr", function() require("easy-dotnet").run_default() end, desc = "Run Project" },
-      { "<leader>Dt", function() require("easy-dotnet").test_default() end, desc = "Test Project" },
-      { "<leader>Ds", function() require("easy-dotnet").restore() end, desc = "Restore Packages" },
-      { "<leader>Dc", function() require("easy-dotnet").clean() end, desc = "Clean Project" },
-      { "<leader>Dp", function() require("easy-dotnet").get_debug_dll() end, desc = "Pick Debug DLL" },
-      { "<leader>Dn", function() require("easy-dotnet").new() end, desc = "New Project/Solution" },
-      { "<leader>Da", function() require("easy-dotnet").add_package() end, desc = "Add NuGet Package" },
-      { "<leader>DR", function() require("easy-dotnet").remove_package() end, desc = "Remove NuGet Package" },
-    },
-    opts = {
-      get_sdk_path = function() return vim.fn.trim(vim.fn.system "dotnet --list-sdks | head -1 | cut -d' ' -f2") end,
-      auto_bootstrap_namespace = true,
-    },
-    config = function(_, opts)
-      require("easy-dotnet").setup(opts)
-      -- Auto-discover and set debug DLL for DAP
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "cs",
-        callback = function()
-          local dll_path = require("easy-dotnet").get_debug_dll()
-          if dll_path then
-            require("dap").configurations.cs = require("dap").configurations.cs or {}
-            table.insert(require("dap").configurations.cs, {
-              type = "coreclr",
-              name = "Launch " .. vim.fs.basename(dll_path),
-              request = "launch",
-              program = dll_path,
-            })
-          end
-        end,
-      })
-    end,
-  },
-  {
     "nvim-neo-tree/neo-tree.nvim",
     optional = true,
     opts = function(_, opts)
@@ -161,36 +122,8 @@ return {
         ".cache",
       }
 
-      -- Custom commands for C# projects
       opts.window = opts.window or {}
       opts.window.mappings = opts.window.mappings or {}
-      opts.window.mappings["<leader>nb"] = {
-        function()
-          local node = require("neo-tree.sources.filesystem").get_node()
-          if node and (node.name:match "%.csproj$" or node.name:match "%.sln$") then
-            require("easy-dotnet").build_default_quickfix()
-          end
-        end,
-        desc = "Build C# project",
-      }
-      opts.window.mappings["<leader>nr"] = {
-        function()
-          local node = require("neo-tree.sources.filesystem").get_node()
-          if node and (node.name:match "%.csproj$" or node.name:match "%.sln$") then
-            require("easy-dotnet").run_default()
-          end
-        end,
-        desc = "Run C# project",
-      }
-      opts.window.mappings["<leader>nt"] = {
-        function()
-          local node = require("neo-tree.sources.filesystem").get_node()
-          if node and (node.name:match "%.csproj$" or node.name:match "%.sln$") then
-            require("easy-dotnet").test_default()
-          end
-        end,
-        desc = "Test C# project",
-      }
     end,
   },
 }

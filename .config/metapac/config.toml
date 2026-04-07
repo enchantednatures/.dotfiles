@@ -1,0 +1,10 @@
+enabled_backends = ["arch", "cargo"]
+
+[arch]
+package_manager = "paru"
+
+[cargo]
+locked = true
+binstall = false
+
+

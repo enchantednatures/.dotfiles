@@ -14,13 +14,14 @@
       "~/source/**/*": "allow"
     }
   },
-  "keybinds": {
-    "command_list": "<leader>p"
-  },
   "mcp": {
     "kubernetes": {
       "type": "local",
-      "command": ["npx", "-y", "kubernetes-mcp-server@latest"]
+      "command": [
+        "npx",
+        "-y",
+        "kubernetes-mcp-server@latest"
+      ]
     },
     "github": {
       "type": "local",
@@ -70,5 +71,8 @@
       },
       "color": "primary"
     }
-  }
+  },
+  "plugin": [
+    "oh-my-openagent@latest"
+  ]
 }
