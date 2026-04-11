@@ -173,7 +173,6 @@ return {
     enabled = true, -- can be disabled with neovim nightly as LazyVim implements folding too
     dependencies = {
       "kevinhwang91/promise-async",
-      "nvim-treesitter/nvim-treesitter",
     },
     config = function()
       vim.o.foldcolumn = "0" -- '0' does not show the fold column, higher values increase the width

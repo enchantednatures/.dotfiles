@@ -389,7 +389,7 @@ return {
     "enchantednatures/topsail.nvim",
     -- dir = "~/dev/topsail.nvim",
     lazy = true,
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = {},
     --- @type TopsailConfig
     opts = {
       notify = true,

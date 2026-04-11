@@ -60,6 +60,7 @@ if status is-interactive
 
     # Enable vi mode
     fish_vi_key_bindings
+    load_api_keys
 
     # Enable directory-specific variables
     direnv hook fish | source

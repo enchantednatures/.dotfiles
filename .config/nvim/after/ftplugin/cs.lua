@@ -8,7 +8,7 @@ vim.opt_local.wrap = false
 
 -- Better folding for C# classes and methods
 vim.opt_local.foldmethod = "expr"
-vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt_local.foldlevel = 1
 
 -- Enable case-insensitive search for C# (common pattern)

@@ -4,8 +4,6 @@ return {
     ft = { "go", "gomod", "gowork", "gotmpl" },
     dependencies = {
       "ray-x/guihua.lua",
-      -- "neovim/nvim-lspconfig",
-      "nvim-treesitter/nvim-treesitter",
       "nvim-neotest/neotest",
       -- NOTE: neotest-go removed - using neotest-golang from test.lua instead
     },
