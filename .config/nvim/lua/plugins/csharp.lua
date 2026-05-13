@@ -68,6 +68,7 @@ return {
   {
     "Hoffs/omnisharp-extended-lsp.nvim",
     ft = { "cs" },
+    enabled = false,
     config = function()
       -- Enhanced go-to-definition for decompiled sources
       local extended = require "omnisharp_extended"
@@ -103,27 +104,6 @@ return {
           end
         end,
       })
-    end,
-  },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    optional = true,
-    opts = function(_, opts)
-      -- Add C# specific file extensions and icons
-      opts.filesystem = opts.filesystem or {}
-      opts.filesystem.filtered_items = opts.filesystem.filtered_items or {}
-      opts.filesystem.filtered_items.hide_dotfiles = false
-      opts.filesystem.filtered_items.hide_hidden = false
-
-      -- Show solution and project files prominently
-      opts.filesystem.filtered_items.never_show = {
-        ".git",
-        "node_modules",
-        ".cache",
-      }
-
-      opts.window = opts.window or {}
-      opts.window.mappings = opts.window.mappings or {}
     end,
   },
 }

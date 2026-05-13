@@ -5,7 +5,6 @@ return {
     dependencies = {
       "ray-x/guihua.lua",
       "nvim-neotest/neotest",
-      -- NOTE: neotest-go removed - using neotest-golang from test.lua instead
     },
     build = ':lua require("go.install").update_all_sync()',
     config = function()

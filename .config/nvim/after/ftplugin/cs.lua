@@ -9,7 +9,7 @@ vim.opt_local.wrap = false
 -- Better folding for C# classes and methods
 vim.opt_local.foldmethod = "expr"
 vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt_local.foldlevel = 1
+vim.opt_local.foldlevel = 99
 
 -- Enable case-insensitive search for C# (common pattern)
 vim.opt_local.ignorecase = true
@@ -78,9 +78,10 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "LspAttach", "BufReadPre", "BufWrit
     local clients = vim.lsp.get_clients { name = "roslyn" }
     if not clients or #clients == 0 then return end
 
-    local buffers = vim.lsp.get_buffers_by_client_id(clients[1].id)
-    for _, buf in ipairs(buffers) do
-      vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
+    for buf, _ in pairs(clients[1].attached_buffers) do
+      if vim.lsp.util._refresh then
+        vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
+      end
     end
   end,
 })
@@ -120,10 +121,14 @@ end, { desc = "Remove unnecessary using directives" })
 -- Add compiler
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "LspAttach", "BufReadPre", "BufWritePost" }, {
-  callback = function()
+  callback = function(args)
     local clients = vim.lsp.get_clients { name = "roslyn" }
     if not clients or #clients == 0 then return end
-    vim.lsp.codelens.refresh()
+    if vim.lsp.codelens.enable then
+      vim.lsp.codelens.enable(true, { bufnr = args.buf })
+    else
+      vim.lsp.codelens.refresh({ bufnr = args.buf })
+    end
   end,
 })
 

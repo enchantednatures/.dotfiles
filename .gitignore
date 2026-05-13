@@ -12,3 +12,4 @@ notes
 .sync-conflict-20250504-192320-QM2HOI5.gitignore
 .config/gh/hosts.yml
 .config/sops
+.config/helm/registry/config.json

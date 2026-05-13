@@ -11,6 +11,10 @@ return {
     cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonLog", "MasonUpdate" },
     config = function()
       require("mason").setup {
+        registries = {
+          "github:mason-org/mason-registry",
+          "github:Crashdummyy/mason-registry",
+        },
         ui = {
           icons = {
             package_installed = "✓",
@@ -59,17 +63,17 @@ return {
   },
   -- ============================================================================
   -- None-ls (formerly null-ls) - Audit Note
-  -- 
+  --
   -- Purpose: Provides code actions and diagnostics not available via LSP
-  -- 
+  --
   -- Current Usage:
   --   Code Actions:
   --     - gomodifytags: Modify Go struct tags (add/remove/edit json/db tags)
   --     - impl: Generate Go interface implementations
-  --   
+  --
   --   Diagnostics (Linting):
   --     - cmake_lint: CMakeLists.txt linting
-  --     - hadolint: Dockerfile linting  
+  --     - hadolint: Dockerfile linting
   --     - cppcheck: C/C++ static analysis
   --     - golangci_lint: Go comprehensive linting
   --     - terraform_validate: Terraform validation (using tofu)
