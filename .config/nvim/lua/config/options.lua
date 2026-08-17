@@ -56,7 +56,7 @@ vim.opt.wildoptions = "pum" -- Command-line completion menu
 -- ============================================================================
 -- Editor Behavior
 -- ============================================================================
-vim.g.clipboard = "osc52"
+-- vim.g.clipboard = "osc52"
 vim.opt.clipboard = "unnamedplus" -- Use system clipboard
 vim.opt.updatetime = 100 -- Faster completion
 vim.opt.shortmess = vim.opt.shortmess + "c" -- Don't show completion messages

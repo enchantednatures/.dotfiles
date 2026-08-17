@@ -50,3 +50,5 @@
 	version = 2
 [feature]
 	manyFiles = true
+[branch]
+	autoSetupMerge = always
